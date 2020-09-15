@@ -10,6 +10,7 @@ import (
 
 	"github.com/takuya911/go_pf/services/graphql/graph/generated"
 	"github.com/takuya911/go_pf/services/graphql/graph/model"
+	pb "github.com/takuya911/go_pf/services/graphql/pb"
 	"google.golang.org/grpc"
 )
 
@@ -39,7 +40,7 @@ func (r *queryResolver) User(ctx context.Context) ([]*model.User, error) {
 		log.Fatalf("could not greet: %v", err)
 	}
 
-	log.Printf(t.GetUser())
+	log.Print(t)
 
 	// 本題
 	return r.users, nil

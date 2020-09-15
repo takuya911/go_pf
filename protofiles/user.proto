@@ -11,5 +11,6 @@ message GetUserRequest {
 }
 
 message GetUserResponse {
-  string user = 1;
+  string id = 1;
+  string name = 2;
 }
