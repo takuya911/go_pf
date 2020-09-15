@@ -10,7 +10,7 @@ import (
 
 	"github.com/takuya911/go_pf/services/graphql/graph/generated"
 	"github.com/takuya911/go_pf/services/graphql/graph/model"
-	pb "github.com/takuya911/go_pf/services/graphql/pb"
+	pb "github.com/takuya911/go_pf/services/graphql/proto"
 	"google.golang.org/grpc"
 )
 
