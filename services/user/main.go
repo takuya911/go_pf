@@ -17,7 +17,8 @@ type server struct {
 func (s *server) GetUser(ctx context.Context, in *pb.GetUserRequest) (*pb.GetUserResponse, error) {
 	log.Printf("request received")
 	var id = in.Id
-	return &pb.GetUserResponse{User: "user" + id}, nil
+	var name = "name"
+	return &pb.GetUserResponse{Id: id, Name: name}, nil
 }
 
 func main() {
