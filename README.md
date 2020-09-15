@@ -1,8 +1,8 @@
-# golang portfolio
+# Golang Portfolio
 ポートフォリオ&勉強用に作ったリポジトリです。
 以下の技術を勉強するために、無駄に盛り込んでいます。
-- golang
-- micro service
+- Golang
+- Micro Service
 - gRPC
 - GraphQL
 
