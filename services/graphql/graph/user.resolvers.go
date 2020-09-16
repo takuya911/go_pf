@@ -35,7 +35,7 @@ func (r *queryResolver) User(ctx context.Context) ([]*model.User, error) {
 	defer cancel()
 
 	// 取得
-	t, err := userC.GetUser(ctx, &pb.GetUserRequest{Id: "1"})
+	t, err := userC.GetUser(ctx, &pb.GetUserRequest{Id: 1})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}

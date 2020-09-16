@@ -15,7 +15,7 @@ func (r *mutationResolver) Noop(ctx context.Context, input *model.NoopInput) (*m
 	panic(fmt.Errorf("not implemented"))
 }
 
-func (r *queryResolver) Node(ctx context.Context, id string) (string, error) {
+func (r *queryResolver) Node(ctx context.Context, id int64) (string, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 

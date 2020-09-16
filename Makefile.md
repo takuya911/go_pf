@@ -4,3 +4,7 @@
 ```
 $ make pb-gen service=${service}
 ```
+- 叩けない時はpathがおかしくなっていることがある
+```
+$ export PATH=$PATH:$GOPATH/bin
+```
