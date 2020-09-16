@@ -9,14 +9,6 @@ type CreateUser struct {
 	Password string `json:"password"`
 }
 
-type NoopInput struct {
-	ClientMutationID *string `json:"clientMutationId"`
-}
-
-type NoopPayload struct {
-	ClientMutationID *string `json:"clientMutationId"`
-}
-
 type User struct {
 	ID        int64  `json:"id"`
 	Name      string `json:"name"`
