@@ -255,7 +255,7 @@ func (ec *executionContext) introspectType(name string) (*introspection.Type, er
 }
 
 var sources = []*ast.Source{
-	{Name: "graph/schema/schema.graphqls", Input: `schema {
+	{Name: "graph/schema/schema.graphql", Input: `schema {
     query: Query
     mutation: Mutation
 }
@@ -275,7 +275,7 @@ input NoopInput {
 type NoopPayload {
     clientMutationId: String
 }`, BuiltIn: false},
-	{Name: "graph/schema/user.graphqls", Input: `extend type Query {
+	{Name: "graph/schema/user.graphql", Input: `extend type Query {
   user: [User!]!
 }
 
