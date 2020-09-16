@@ -2,12 +2,19 @@
 
 package model
 
-type NewUser struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+type CreateUser struct {
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"Password"`
 }
 
 type User struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	ID        string  `json:"id"`
+	Name      string  `json:"name"`
+	Email     string  `json:"email"`
+	Password  string  `json:"Password"`
+	CreatedAt string  `json:"createdAt"`
+	UpdatedAt string  `json:"updatedAt"`
+	DeletedAt *string `json:"deletedAt"`
 }

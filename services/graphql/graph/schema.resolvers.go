@@ -14,7 +14,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-func (r *mutationResolver) CreateUser(ctx context.Context, input model.NewUser) (*model.User, error) {
+func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUser) (*model.User, error) {
 	user := &model.User{
 		ID:   input.ID,
 		Name: input.Name,
