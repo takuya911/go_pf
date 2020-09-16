@@ -6,7 +6,7 @@ type CreateUser struct {
 	ID       string `json:"id"`
 	Name     string `json:"name"`
 	Email    string `json:"email"`
-	Password string `json:"Password"`
+	Password string `json:"password"`
 }
 
 type NoopInput struct {
@@ -18,11 +18,11 @@ type NoopPayload struct {
 }
 
 type User struct {
-	ID        string  `json:"id"`
-	Name      string  `json:"name"`
-	Email     string  `json:"email"`
-	Password  string  `json:"Password"`
-	CreatedAt string  `json:"createdAt"`
-	UpdatedAt string  `json:"updatedAt"`
-	DeletedAt *string `json:"deletedAt"`
+	ID        string `json:"id"`
+	Name      string `json:"name"`
+	Email     string `json:"email"`
+	Password  string `json:"password"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
+	DeletedAt string `json:"deletedAt"`
 }

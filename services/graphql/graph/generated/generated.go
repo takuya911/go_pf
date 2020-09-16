@@ -177,7 +177,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.User.Name(childComplexity), true
 
-	case "User.Password":
+	case "User.password":
 		if e.complexity.User.Password == nil {
 			break
 		}
@@ -287,17 +287,17 @@ type User {
   id: ID!
   name: String!
   email: String!
-  Password: String!
+  password: String!
   createdAt: String!
   updatedAt: String!
-  deletedAt: String
+  deletedAt: String!
 }
 
 input CreateUser {
   id: ID!
   name: String!
   email: String!
-  Password: String!
+  password: String!
 }
 `, BuiltIn: false},
 }
@@ -761,7 +761,7 @@ func (ec *executionContext) _User_email(ctx context.Context, field graphql.Colle
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _User_Password(ctx context.Context, field graphql.CollectedField, obj *model.User) (ret graphql.Marshaler) {
+func (ec *executionContext) _User_password(ctx context.Context, field graphql.CollectedField, obj *model.User) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -887,11 +887,14 @@ func (ec *executionContext) _User_deletedAt(ctx context.Context, field graphql.C
 		return graphql.Null
 	}
 	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
 		return graphql.Null
 	}
-	res := resTmp.(*string)
+	res := resTmp.(string)
 	fc.Result = res
-	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Directive_name(ctx context.Context, field graphql.CollectedField, obj *introspection.Directive) (ret graphql.Marshaler) {
@@ -1979,10 +1982,10 @@ func (ec *executionContext) unmarshalInputCreateUser(ctx context.Context, obj in
 			if err != nil {
 				return it, err
 			}
-		case "Password":
+		case "password":
 			var err error
 
-			ctx := graphql.WithFieldInputContext(ctx, graphql.NewFieldInputWithField("Password"))
+			ctx := graphql.WithFieldInputContext(ctx, graphql.NewFieldInputWithField("password"))
 			it.Password, err = ec.unmarshalNString2string(ctx, v)
 			if err != nil {
 				return it, err
@@ -2162,8 +2165,8 @@ func (ec *executionContext) _User(ctx context.Context, sel ast.SelectionSet, obj
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
-		case "Password":
-			out.Values[i] = ec._User_Password(ctx, field, obj)
+		case "password":
+			out.Values[i] = ec._User_password(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
@@ -2179,6 +2182,9 @@ func (ec *executionContext) _User(ctx context.Context, sel ast.SelectionSet, obj
 			}
 		case "deletedAt":
 			out.Values[i] = ec._User_deletedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}

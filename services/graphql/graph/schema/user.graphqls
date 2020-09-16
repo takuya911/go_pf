@@ -10,15 +10,15 @@ type User {
   id: ID!
   name: String!
   email: String!
-  Password: String!
+  password: String!
   createdAt: String!
   updatedAt: String!
-  deletedAt: String
+  deletedAt: String!
 }
 
 input CreateUser {
   id: ID!
   name: String!
   email: String!
-  Password: String!
+  password: String!
 }

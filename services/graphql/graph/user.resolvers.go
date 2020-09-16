@@ -34,13 +34,19 @@ func (r *queryResolver) User(ctx context.Context) ([]*model.User, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
+	// 取得
 	t, err := userC.GetUser(ctx, &pb.GetUserRequest{Id: "1"})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
 
-	log.Print(t)
+	user := &model.User{
+		ID:       t.GetId(),
+		Name:     t.GetName(),
+		Email:    t.GetEmail(),
+		Password: t.GetPassword(),
+	}
+	r.users = append(r.users, user)
 
-	// 本題
 	return r.users, nil
 }
