@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
@@ -15,20 +16,24 @@ import (
 )
 
 func main() {
-	port := "80"
+	// get env
+	graphqlPort := os.Getenv("graphql_port")
+	userServicePort := os.Getenv("user_service_port")
+
 	ctx := context.Background()
-	conn, err := grpc.DialContext(ctx, "user:50051", grpc.WithInsecure())
+	conn, err := grpc.DialContext(ctx, userServicePort, grpc.WithInsecure())
 	if err != nil {
 		panic(err)
 	}
 	defer conn.Close()
 	userC := pb.NewUserServiceClient(conn)
+
+	// handler
 	resolver := graph.NewResolver(userC)
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: resolver}))
-
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	http.Handle("/query", srv)
 
-	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	log.Printf("connect to http://localhost:%s/ for GraphQL playground", graphqlPort)
+	log.Fatal(http.ListenAndServe(":"+graphqlPort, nil))
 }

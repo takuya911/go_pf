@@ -8,6 +8,9 @@ services:
       - ./services/graphql:/app
     ports:
       - "80:80"
+    environment:
+      - graphql_port=80
+      - user_service_port=user:50051
     tty: true
   user:
     build:

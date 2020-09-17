@@ -18,7 +18,7 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUse
 }
 
 func (r *queryResolver) User(ctx context.Context) ([]*model.User, error) {
-	t, err := r.userClient.GetUser(ctx, &pb.GetUserRequest{})
+	t, err := r.userClient.GetUser(ctx, &pb.GetUserRequest{Id: 1})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
