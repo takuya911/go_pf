@@ -5,19 +5,26 @@ import "google/protobuf/timestamp.proto";
 
 
 service UserService {
-  rpc GetUser (GetUserRequest) returns (GetUserResponse) {}
+  rpc GetUser (GetUserReq) returns (User) {}
 }
 
-message GetUserRequest {
+message GetUserReq {
   int64 id = 1;
 }
 
-message GetUserResponse {
+message User {
   int64 id = 1;
   string name = 2;
   string email = 3;
   string password = 4;
-  google.protobuf.Timestamp  createdAt = 5;
-  google.protobuf.Timestamp  updatedAt = 6;
-  google.protobuf.Timestamp  deletedAt = 7;
+  google.protobuf.Timestamp createdAt = 5;
+  google.protobuf.Timestamp updatedAt = 6;
+  google.protobuf.Timestamp deletedAt = 7;
 }
+
+// message CreateUser {
+// 	int64 id = 1;
+// 	string name = 2;
+// 	string email = 3;
+// 	string password = 4;
+// }

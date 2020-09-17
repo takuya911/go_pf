@@ -21,6 +21,8 @@ func main() {
 	userServicePort := os.Getenv("user_service_port")
 
 	ctx := context.Background()
+
+	// User gRPC connect
 	conn, err := grpc.DialContext(ctx, userServicePort, grpc.WithInsecure())
 	if err != nil {
 		panic(err)
@@ -28,7 +30,7 @@ func main() {
 	defer conn.Close()
 	userC := pb.NewUserServiceClient(conn)
 
-	// handler
+	// Regist handler
 	resolver := graph.NewResolver(userC)
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: resolver}))
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))

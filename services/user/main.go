@@ -15,10 +15,10 @@ type server struct {
 }
 
 // GET User
-func (s *server) GetUser(ctx context.Context, in *pb.GetUserRequest) (*pb.GetUserResponse, error) {
+func (s *server) GetUser(ctx context.Context, in *pb.GetUserReq) (*pb.User, error) {
 	log.Printf("request received")
 	ts := ptypes.TimestampNow()
-	result := &pb.GetUserResponse{
+	result := &pb.User{
 		Id:        in.Id,
 		Name:      "name",
 		Email:     "email@email.com",

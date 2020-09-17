@@ -6,38 +6,32 @@ package graph
 import (
 	"context"
 	"fmt"
-	"log"
 
 	"github.com/takuya911/go_pf/services/graphql/graph/generated"
-	"github.com/takuya911/go_pf/services/graphql/graph/model"
-	pb "github.com/takuya911/go_pf/services/graphql/proto"
+	user "github.com/takuya911/go_pf/services/graphql/proto"
 )
 
-func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUser) (*model.User, error) {
+func (r *queryResolver) GetUser(ctx context.Context) (*user.User, error) {
+	return r.userClient.GetUser(ctx, &user.GetUserReq{Id: 1})
+}
+
+func (r *userResolver) CreatedAt(ctx context.Context, obj *user.User) (string, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 
-func (r *queryResolver) GetUser(ctx context.Context) (*model.User, error) {
-	t, err := r.userClient.GetUser(ctx, &pb.GetUserRequest{Id: 1})
-	if err != nil {
-		log.Fatalf("could not greet: %v", err)
-	}
-
-	user := &model.User{
-		ID:       t.GetId(),
-		Name:     t.GetName(),
-		Email:    t.GetEmail(),
-		Password: t.GetPassword(),
-	}
-
-	return user, nil
+func (r *userResolver) UpdatedAt(ctx context.Context, obj *user.User) (string, error) {
+	panic(fmt.Errorf("not implemented"))
 }
 
-// Mutation returns generated.MutationResolver implementation.
-func (r *resolver) Mutation() generated.MutationResolver { return &mutationResolver{r} }
+func (r *userResolver) DeletedAt(ctx context.Context, obj *user.User) (string, error) {
+	panic(fmt.Errorf("not implemented"))
+}
 
 // Query returns generated.QueryResolver implementation.
 func (r *resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
-type mutationResolver struct{ *resolver }
+// User returns generated.UserResolver implementation.
+func (r *resolver) User() generated.UserResolver { return &userResolver{r} }
+
 type queryResolver struct{ *resolver }
+type userResolver struct{ *resolver }

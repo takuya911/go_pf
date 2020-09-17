@@ -2,9 +2,9 @@ extend type Query {
   getUser: User!
 }
 
-extend type Mutation {
-  createUser(input: CreateUser!): User!
-}
+# extend type Mutation {
+#   createUser(input: CreateUser!): User!
+# }
 
 type User {
   id: ID!
@@ -16,9 +16,9 @@ type User {
   deletedAt: String!
 }
 
-input CreateUser {
-  id: ID!
-  name: String!
-  email: String!
-  password: String!
-}
+# input CreateUser {
+#   id: ID!
+#   name: String!
+#   email: String!
+#   password: String!
+# }
