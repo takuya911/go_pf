@@ -9,7 +9,6 @@ service UserService {
 }
 
 message GetUserRequest {
-  int64 id = 1;
 }
 
 message GetUserResponse {
