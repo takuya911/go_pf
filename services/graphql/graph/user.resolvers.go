@@ -17,7 +17,7 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUse
 	panic(fmt.Errorf("not implemented"))
 }
 
-func (r *queryResolver) User(ctx context.Context) ([]*model.User, error) {
+func (r *queryResolver) GetUser(ctx context.Context) (*model.User, error) {
 	t, err := r.userClient.GetUser(ctx, &pb.GetUserRequest{Id: 1})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
@@ -29,10 +29,8 @@ func (r *queryResolver) User(ctx context.Context) ([]*model.User, error) {
 		Email:    t.GetEmail(),
 		Password: t.GetPassword(),
 	}
-	users := []*model.User{}
-	users = append(users, user)
 
-	return users, nil
+	return user, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
