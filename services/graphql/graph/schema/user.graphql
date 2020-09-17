@@ -1,19 +1,19 @@
+scalar Time
 extend type Query {
   getUser: User!
 }
-
 # extend type Mutation {
 #   createUser(input: CreateUser!): User!
 # }
 
-type User {
+extend type User {
   id: ID!
   name: String!
   email: String!
   password: String!
-  createdAt: String!
-  updatedAt: String!
-  deletedAt: String!
+  createdAt: Time!
+  updatedAt: Time!
+  deletedAt: Time!
 }
 
 # input CreateUser {
