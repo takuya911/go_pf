@@ -5,8 +5,8 @@ package graph
 
 import (
 	"context"
+	"fmt"
 	"log"
-	"time"
 
 	"github.com/takuya911/go_pf/services/graphql/graph/generated"
 	"github.com/takuya911/go_pf/services/graphql/graph/model"
@@ -14,20 +14,11 @@ import (
 )
 
 func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUser) (*model.User, error) {
-	user := &model.User{
-		ID:   input.ID,
-		Name: input.Name,
-	}
-	r.users = append(r.users, user)
-	return user, nil
+	panic(fmt.Errorf("not implemented"))
 }
 
 func (r *queryResolver) User(ctx context.Context) ([]*model.User, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()
-
-	// 取得
-	t, err := r.UserClient.GetUser(ctx, &pb.GetUserRequest{Id: 1})
+	t, err := r.userClient.GetUser(ctx, &pb.GetUserRequest{Id: 1})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
@@ -38,16 +29,18 @@ func (r *queryResolver) User(ctx context.Context) ([]*model.User, error) {
 		Email:    t.GetEmail(),
 		Password: t.GetPassword(),
 	}
-	r.users = append(r.users, user)
+	users := []*model.User{}
+	users = append(users, user)
 
-	return r.users, nil
+	return users, nil
+
 }
 
 // Mutation returns generated.MutationResolver implementation.
-func (r *Resolver) Mutation() generated.MutationResolver { return &mutationResolver{r} }
+func (r *resolver) Mutation() generated.MutationResolver { return &mutationResolver{r} }
 
 // Query returns generated.QueryResolver implementation.
-func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
+func (r *resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
-type mutationResolver struct{ *Resolver }
-type queryResolver struct{ *Resolver }
+type mutationResolver struct{ *resolver }
+type queryResolver struct{ *resolver }

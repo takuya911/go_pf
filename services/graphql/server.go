@@ -23,8 +23,8 @@ func main() {
 	}
 	defer conn.Close()
 	userC := pb.NewUserServiceClient(conn)
-
-	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{UserClient: userC}}))
+	resolver := graph.NewResolver(userC)
+	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: resolver}))
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	http.Handle("/query", srv)
