@@ -5,16 +5,16 @@ import (
 	"log"
 
 	"github.com/golang/protobuf/ptypes"
+	"github.com/takuya911/go_pf/services/user/interface/usecase"
 	pb "github.com/takuya911/go_pf/services/user/proto"
-	"github.com/takuya911/go_pf/services/user/usecase/interactor"
 )
 
 type userController struct {
-	userInteractor interactor.UserUsecase
+	userInteractor usecase.UserUsecase
 }
 
 // NewUserController function
-func NewUserController(u interactor.UserUsecase) pb.UserServiceServer {
+func NewUserController(u usecase.UserUsecase) pb.UserServiceServer {
 	return &userController{u}
 }
 

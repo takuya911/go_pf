@@ -9,7 +9,7 @@ import (
 	"github.com/takuya911/go_pf/services/user/infrastructure"
 	pb "github.com/takuya911/go_pf/services/user/proto"
 	"github.com/takuya911/go_pf/services/user/repository"
-	"github.com/takuya911/go_pf/services/user/usecase/interactor"
+	"github.com/takuya911/go_pf/services/user/usecase"
 )
 
 func main() {
@@ -27,7 +27,7 @@ func main() {
 
 	// userservice
 	userRepository := repository.NewUserRepository(dbConn)
-	userInteractor := interactor.NewUserInteractor(userRepository)
+	userInteractor := usecase.NewUserInteractor(userRepository)
 	userController := controller.NewUserController(userInteractor)
 
 	// services regist

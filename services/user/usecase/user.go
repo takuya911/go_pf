@@ -1,4 +1,4 @@
-package interactor
+package usecase
 
 import (
 	"context"
@@ -14,11 +14,6 @@ type userInteractor struct {
 // NewUserInteractor function
 func NewUserInteractor(u repository.UserRepository) *userInteractor {
 	return &userInteractor{u}
-}
-
-// UserUsecase interface
-type UserUsecase interface {
-	GetUser(ctx context.Context, in *pb.GetUserReq) (*pb.User, error)
 }
 
 // get user
