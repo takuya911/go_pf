@@ -5,8 +5,8 @@ import (
 	"net"
 	"os"
 
+	"github.com/takuya911/go_pf/services/user/controller"
 	"github.com/takuya911/go_pf/services/user/infrastructure"
-	"github.com/takuya911/go_pf/services/user/interface/controllers"
 	"github.com/takuya911/go_pf/services/user/interface/repository"
 	pb "github.com/takuya911/go_pf/services/user/proto"
 	"github.com/takuya911/go_pf/services/user/usecase/interactor"
@@ -28,7 +28,7 @@ func main() {
 	// userservice
 	userRepository := repository.NewUserRepository(dbConn)
 	userInteractor := interactor.NewUserInteractor(userRepository)
-	userController := controllers.NewUserController(userInteractor)
+	userController := controller.NewUserController(userInteractor)
 
 	// services regist
 	server := infrastructure.NewGrpcServer(userController)
