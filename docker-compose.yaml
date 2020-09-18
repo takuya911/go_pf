@@ -18,18 +18,26 @@ services:
       dockerfile: build/Dockerfile.dev
     volumes:
       - ./services/user:/app
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=mysql-db
+      - DB_USER=root
+      - DB_PASS=password
+      - DB_COLLATION=utf8mb4_unicode_ci
+      - HASH_NUMBER=12
     ports:
       - "50051:50051"
     tty: true
   db:
     image: mysql:5.7
     ports:
-    - 3306:3306
+      - 3306:3306
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-    - ./infrastructure/mysql/data:/var/lib/mysql
-    # - ./infrastructure/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf
-    - ./infrastructure/mysql/init:/docker-entrypoint-initdb.d
+      - ./infrastructure/mysql/data:/var/lib/mysql
+      # - ./infrastructure/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./infrastructure/mysql/init:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: mysql-db
