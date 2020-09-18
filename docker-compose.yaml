@@ -21,3 +21,28 @@ services:
     ports:
       - "50051:50051"
     tty: true
+  db:
+    image: mysql:5.7
+    ports:
+    - 3306:3306
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+    - ./infrastructure/mysql/data:/var/lib/mysql
+    - ./infrastructure/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf
+    - ./infrastructure/mysql/init:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mysql-db
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=password
+    ports:
+      - 1234:80
+    volumes:
+      - /sessions
