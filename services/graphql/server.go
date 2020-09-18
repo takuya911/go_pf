@@ -17,13 +17,13 @@ import (
 
 func main() {
 	// get env
-	graphqlPort := os.Getenv("graphql_port")
-	userServicePort := os.Getenv("user_service_port")
+	graphqlPort := os.Getenv("GRAPHQL_PORT")
+	userServicePort := os.Getenv("USER_SERVICE_PORT")
 
 	ctx := context.Background()
 
 	// User gRPC connect
-	conn, err := grpc.DialContext(ctx, userServicePort, grpc.WithInsecure())
+	conn, err := grpc.DialContext(ctx, "user:"+userServicePort, grpc.WithInsecure())
 	if err != nil {
 		panic(err)
 	}

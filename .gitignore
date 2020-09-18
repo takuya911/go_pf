@@ -1,0 +1,4 @@
+infrastructure/mysql/data
+
+services/graphql/tmp
+services/user/tmp

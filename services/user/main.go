@@ -1,45 +1,40 @@
 package main
 
 import (
-	"context"
 	"log"
 	"net"
+	"os"
 
-	"github.com/golang/protobuf/ptypes"
+	"github.com/takuya911/go_pf/services/user/controller"
+	"github.com/takuya911/go_pf/services/user/infrastructure"
 	pb "github.com/takuya911/go_pf/services/user/proto"
-	"google.golang.org/grpc"
+	"github.com/takuya911/go_pf/services/user/repository"
+	"github.com/takuya911/go_pf/services/user/usecase"
 )
 
-type server struct {
-	pb.UnimplementedUserServiceServer
-}
-
-// GET User
-func (s *server) GetUser(ctx context.Context, in *pb.GetUserReq) (*pb.User, error) {
-	log.Printf("request received")
-	ts := ptypes.TimestampNow()
-	result := &pb.User{
-		Id:        in.Id,
-		Name:      "name",
-		Email:     "email@email.com",
-		Password:  "password",
-		CreatedAt: ts,
-		UpdatedAt: ts,
-		DeletedAt: ts,
-	}
-	return result, nil
-}
-
 func main() {
-	lis, err := net.Listen("tcp", ":50051")
+	// db connect
+	dbConn, err := infrastructure.NewGormConnect()
+	if err != nil {
+		panic(err)
+	}
+	defer dbConn.Close()
+
+	lis, err := net.Listen("tcp", ":"+os.Getenv("USER_SERVICE_PORT"))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	s := grpc.NewServer()
+	// userservice
+	userRepository := repository.NewUserRepository(dbConn)
+	userInteractor := usecase.NewUserInteractor(userRepository)
+	userController := controller.NewUserController(userInteractor)
 
-	pb.RegisterUserServiceServer(s, &server{})
-	if err := s.Serve(lis); err != nil {
+	// services regist
+	server := infrastructure.NewGrpcServer(userController)
+	pb.RegisterUserServiceServer(server, userController)
+
+	if err := server.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
 }
