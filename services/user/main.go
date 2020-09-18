@@ -7,8 +7,8 @@ import (
 
 	"github.com/takuya911/go_pf/services/user/controller"
 	"github.com/takuya911/go_pf/services/user/infrastructure"
-	"github.com/takuya911/go_pf/services/user/interface/repository"
 	pb "github.com/takuya911/go_pf/services/user/proto"
+	"github.com/takuya911/go_pf/services/user/repository"
 	"github.com/takuya911/go_pf/services/user/usecase/interactor"
 )
 

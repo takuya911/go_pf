@@ -3,8 +3,8 @@ package interactor
 import (
 	"context"
 
+	"github.com/takuya911/go_pf/services/user/interface/repository"
 	pb "github.com/takuya911/go_pf/services/user/proto"
-	"github.com/takuya911/go_pf/services/user/usecase/repository"
 )
 
 type userInteractor struct {
