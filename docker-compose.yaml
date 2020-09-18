@@ -28,7 +28,7 @@ services:
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
     - ./infrastructure/mysql/data:/var/lib/mysql
-    - ./infrastructure/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf
+    # - ./infrastructure/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf
     - ./infrastructure/mysql/init:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: password
