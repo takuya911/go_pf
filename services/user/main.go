@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"net"
+	"os"
 
 	"github.com/golang/protobuf/ptypes"
 	"github.com/takuya911/go_pf/services/user/infrastructure"
@@ -39,7 +40,7 @@ func main() {
 	}
 	defer dbConn.Close()
 
-	lis, err := net.Listen("tcp", ":50051")
+	lis, err := net.Listen("tcp", ":"+os.Getenv("USER_SERVICE_PORT"))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
