@@ -3,6 +3,7 @@ package usecase
 import (
 	"context"
 
+	"github.com/takuya911/go_pf/services/user/domain"
 	"github.com/takuya911/go_pf/services/user/interface/repository"
 	pb "github.com/takuya911/go_pf/services/user/proto"
 )
@@ -17,7 +18,7 @@ func NewUserInteractor(u repository.UserRepository) *userInteractor {
 }
 
 // get user
-func (i *userInteractor) GetUser(ctx context.Context, in *pb.GetUserReq) (*pb.User, error) {
-	result := &pb.User{}
+func (i *userInteractor) GetUser(ctx context.Context, in *pb.GetUserReq) (*domain.User, error) {
+	result := &domain.User{}
 	return result, nil
 }

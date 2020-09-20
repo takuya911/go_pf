@@ -3,10 +3,10 @@ package repository
 import (
 	"context"
 
-	pb "github.com/takuya911/go_pf/services/user/proto"
+	"github.com/takuya911/go_pf/services/user/domain"
 )
 
 // UserRepository interface
 type UserRepository interface {
-	GetUser(ctx context.Context, id int64) (*pb.User, error)
+	GetUser(ctx context.Context, id int64) (*domain.User, error)
 }

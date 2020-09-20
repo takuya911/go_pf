@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/jinzhu/gorm"
-	pb "github.com/takuya911/go_pf/services/user/proto"
+	"github.com/takuya911/go_pf/services/user/domain"
 )
 
 type userRepository struct {
@@ -16,7 +16,7 @@ func NewUserRepository(conn *gorm.DB) *userRepository {
 	return &userRepository{conn}
 }
 
-func (r *userRepository) GetUser(ctx context.Context, id int64) (*pb.User, error) {
-	var u pb.User
+func (r *userRepository) GetUser(ctx context.Context, id int64) (*domain.User, error) {
+	var u domain.User
 	return &u, nil
 }
