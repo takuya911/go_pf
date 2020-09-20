@@ -2,9 +2,8 @@ package controller
 
 import (
 	"context"
-	"time"
+	"log"
 
-	"github.com/takuya911/go_pf/services/user/domain"
 	"github.com/takuya911/go_pf/services/user/interface/usecase"
 	pb "github.com/takuya911/go_pf/services/user/proto"
 )
@@ -19,14 +18,9 @@ func NewUserController(u usecase.UserUsecase) pb.UserServiceServer {
 }
 
 func (c *userController) GetUser(ctx context.Context, in *pb.GetUserReq) (*pb.User, error) {
-	result := &domain.User{
-		ID:        in.Id,
-		Name:      "name",
-		Email:     "email@email.com",
-		Password:  "password",
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
-		DeletedAt: time.Now(),
+	result, err := c.userInteractor.GetUser(ctx, in)
+	if err != nil {
+		log.Fatal(err)
 	}
 	return convUserProto(result)
 }

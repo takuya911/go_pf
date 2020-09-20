@@ -8,7 +8,7 @@ import (
 )
 
 type userRepository struct {
-	conn *gorm.DB
+	Conn *gorm.DB
 }
 
 // NewUserRepository function
@@ -17,6 +17,9 @@ func NewUserRepository(conn *gorm.DB) *userRepository {
 }
 
 func (r *userRepository) GetUser(ctx context.Context, id int64) (*domain.User, error) {
-	var u domain.User
-	return &u, nil
+	var user domain.User
+	if result := r.Conn.Where("id = ? AND deleted_at is null", id).Find(&user); result.Error != nil {
+		return nil, result.Error
+	}
+	return &user, nil
 }
