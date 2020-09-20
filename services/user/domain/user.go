@@ -1,6 +1,8 @@
 package domain
 
-import "github.com/golang/protobuf/ptypes/timestamp"
+import (
+	"time"
+)
 
 // User struct
 type User struct {
@@ -8,7 +10,7 @@ type User struct {
 	Name      string
 	Email     string
 	Password  string
-	CreatedAt *timestamp.Timestamp
-	UpdatedAt *timestamp.Timestamp
-	DeletedAt *timestamp.Timestamp
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeletedAt time.Time
 }
