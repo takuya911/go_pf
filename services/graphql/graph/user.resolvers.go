@@ -7,11 +7,16 @@ import (
 	"context"
 
 	"github.com/takuya911/go_pf/services/graphql/graph/generated"
+	"github.com/takuya911/go_pf/services/graphql/graph/model"
 	user "github.com/takuya911/go_pf/services/graphql/proto"
 )
 
-func (r *queryResolver) GetUser(ctx context.Context) (*user.User, error) {
-	return r.userClient.GetUser(ctx, &user.GetUserReq{Id: 1})
+func (r *queryResolver) GetUserByID(ctx context.Context, input model.GetUserForm) (*user.User, error) {
+	request := &user.GetUserForm{
+		Id: input.ID,
+	}
+	return r.userClient.GetUserByID(ctx, request)
+
 }
 
 // Query returns generated.QueryResolver implementation.

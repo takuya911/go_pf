@@ -1,10 +1,14 @@
 scalar Time
 extend type Query {
-  getUser: User!
+  getUserById(input:getUserForm!): User
 }
 # extend type Mutation {
 #   createUser(input: CreateUser!): User!
 # }
+
+input getUserForm{
+  id:ID!
+}
 
 extend type User {
   id: ID!

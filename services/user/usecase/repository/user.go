@@ -1,4 +1,4 @@
-package usecase
+package repository
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 	"github.com/takuya911/go_pf/services/user/domain"
 )
 
-// UserUsecase interface
-type UserUsecase interface {
+// UserRepository interface
+type UserRepository interface {
 	GetUserByID(ctx context.Context, userID int64) (*domain.User, error)
 }
