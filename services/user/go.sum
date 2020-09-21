@@ -263,6 +263,7 @@ github.com/subosito/gotenv v1.2.0/go.mod h1:N0PQaV/YGNqwC0u51sEeR/aUtSLEXKX9iv69
 github.com/takuya911/gRPC_sample/user v0.0.0-20200914231154-fec4c89c3021/go.mod h1:gA1PmDtD/SqlYJRCJG9suW8fw949qHzyXXp1Kfs2yPo=
 github.com/takuya911/go_pf v0.0.0-20200915012242-4f89de0bdeec h1:URnZVAb7FWPZkUIGSHPPX0426N6MgZvmPlnaaJPwg9c=
 github.com/takuya911/go_pf v0.0.0-20200917073903-640f6b415b55 h1:W51PimFVTwNQr/0l8S5f2nxBYUMOoLQTEwCe8zL47DM=
+github.com/takuya911/go_pf v0.0.0-20200918094546-33df3408048b h1:nS2b4d5LWARTzApzXwuBZrKatzZeJzCmgy702MLxr5k=
 github.com/takuya911/golang-study v0.0.0-20200825011709-537b2aa11b88/go.mod h1:bmZi3mJC2uyHK45Do2iXS2EE1I14kQE6FF/Jfgju4jE=
 github.com/takuya911/mcrsvc_user v0.0.0-20200912024907-0b344554af3b h1:hBRHuV3Qh0mbi/+gQtMQvPRnALW8ByXkCUKwPezpuU0=
 github.com/takuya911/mcrsvc_user v0.0.0-20200912024907-0b344554af3b/go.mod h1:QxG8BxNaZs2W4Xiz7eMLgSmKkHNhhYeUvMTPNPDcLpA=

@@ -5,10 +5,10 @@ import "google/protobuf/timestamp.proto";
 
 
 service UserService {
-  rpc GetUser (GetUserReq) returns (User) {}
+  rpc GetUserByID (GetUserForm) returns (User) {}
 }
 
-message GetUserReq {
+message GetUserForm {
   int64 id = 1;
 }
 
