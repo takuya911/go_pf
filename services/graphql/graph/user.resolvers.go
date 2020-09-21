@@ -11,7 +11,7 @@ import (
 )
 
 func (r *queryResolver) GetUser(ctx context.Context) (*user.User, error) {
-	return r.userClient.GetUserByID(ctx, &user.GetUserReq{Id: 1})
+	return r.userClient.GetUser(ctx, &user.GetUserReq{Id: 1})
 }
 
 // Query returns generated.QueryResolver implementation.

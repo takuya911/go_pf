@@ -5,7 +5,7 @@ import "google/protobuf/timestamp.proto";
 
 
 service UserService {
-  rpc GetUserByID (GetUserReq) returns (User) {}
+  rpc GetUser (GetUserReq) returns (User) {}
 }
 
 message GetUserReq {

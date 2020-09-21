@@ -1,6 +1,6 @@
 scalar Time
 extend type Query {
-  getUser(input:user_id): User!
+  getUser: User!
 }
 # extend type Mutation {
 #   createUser(input: CreateUser!): User!
