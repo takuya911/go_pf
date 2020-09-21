@@ -33,3 +33,7 @@ func (c *userController) GetUserByID(ctx context.Context, in *pb.GetUserForm) (*
 	}
 	return convUserProto(result)
 }
+
+func (c *userController) Login(ctx context.Context, in *pb.LoginReq) (*pb.LoginRes, error) {
+	return &pb.LoginRes{}, nil
+}

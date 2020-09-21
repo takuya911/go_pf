@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/99designs/gqlgen v0.12.2
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/ezio1119/fishapp-user v0.0.0-20200701083907-f27f80bfed1a
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/golang/protobuf v1.4.2

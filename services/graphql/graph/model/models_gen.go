@@ -2,6 +2,20 @@
 
 package model
 
+import (
+	user "github.com/takuya911/go_pf/services/graphql/proto"
+)
+
+type LoginInput struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type LoginPayload struct {
+	User      *user.User      `json:"user"`
+	TokenPair *user.TokenPair `json:"tokenPair"`
+}
+
 type GetUserForm struct {
 	ID int64 `json:"id"`
 }

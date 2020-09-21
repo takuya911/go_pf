@@ -3,9 +3,9 @@ syntax = "proto3";
 package user;
 import "google/protobuf/timestamp.proto";
 
-
 service UserService {
   rpc GetUserByID (GetUserForm) returns (User) {}
+  rpc Login(LoginReq) returns (LoginRes);
 }
 
 message GetUserForm {
@@ -22,9 +22,17 @@ message User {
   google.protobuf.Timestamp deletedAt = 7;
 }
 
-// message CreateUser {
-// 	int64 id = 1;
-// 	string name = 2;
-// 	string email = 3;
-// 	string password = 4;
-// }
+message LoginReq {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginRes {
+  User user = 1;
+  TokenPair token_pair = 2;
+}
+
+message TokenPair{
+  string id_token = 1;
+  string refresh_token = 2;
+}
