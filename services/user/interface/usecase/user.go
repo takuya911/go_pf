@@ -9,5 +9,5 @@ import (
 
 // UserUsecase interface
 type UserUsecase interface {
-	GetUser(ctx context.Context, in *pb.GetUserReq) (*domain.User, error)
+	GetUserByID(ctx context.Context, in *pb.GetUserReq) (*domain.User, error)
 }

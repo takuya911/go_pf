@@ -17,8 +17,8 @@ func NewUserController(u usecase.UserUsecase) pb.UserServiceServer {
 	return &userController{u}
 }
 
-func (c *userController) GetUser(ctx context.Context, in *pb.GetUserReq) (*pb.User, error) {
-	result, err := c.userInteractor.GetUser(ctx, in)
+func (c *userController) GetUserByID(ctx context.Context, in *pb.GetUserReq) (*pb.User, error) {
+	result, err := c.userInteractor.GetUserByID(ctx, in)
 	if err != nil {
 		log.Fatal(err)
 	}

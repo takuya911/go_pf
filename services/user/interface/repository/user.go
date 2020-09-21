@@ -8,5 +8,5 @@ import (
 
 // UserRepository interface
 type UserRepository interface {
-	GetUser(ctx context.Context, id int64) (*domain.User, error)
+	GetUserByID(ctx context.Context, id int64) (*domain.User, error)
 }

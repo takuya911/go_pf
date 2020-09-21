@@ -17,9 +17,8 @@ func NewUserInteractor(u repository.UserRepository) *userInteractor {
 	return &userInteractor{u}
 }
 
-// get user
-func (i *userInteractor) GetUser(ctx context.Context, in *pb.GetUserReq) (*domain.User, error) {
-	result, err := i.userRepository.GetUser(ctx, in.Id)
+func (i *userInteractor) GetUserByID(ctx context.Context, in *pb.GetUserReq) (*domain.User, error) {
+	result, err := i.userRepository.GetUserById(ctx, in.Id)
 	if err != nil {
 		return nil, err
 	}
