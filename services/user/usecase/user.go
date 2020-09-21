@@ -18,7 +18,7 @@ func NewUserInteractor(u repository.UserRepository) *userInteractor {
 }
 
 func (i *userInteractor) GetUserByID(ctx context.Context, in *pb.GetUserReq) (*domain.User, error) {
-	result, err := i.userRepository.GetUserById(ctx, in.Id)
+	result, err := i.userRepository.GetUserByID(ctx, in.Id)
 	if err != nil {
 		return nil, err
 	}
