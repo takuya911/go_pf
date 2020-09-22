@@ -23,4 +23,6 @@ type TokenType string
 const (
 	// IDToken const
 	IDToken TokenType = "id_token"
+	// RefreshToken const
+	RefreshToken TokenType = "refresh_token"
 )

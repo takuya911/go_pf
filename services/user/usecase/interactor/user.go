@@ -3,6 +3,7 @@ package interactor
 import (
 	"context"
 	"log"
+	"strconv"
 
 	"github.com/takuya911/go_pf/services/user/domain"
 	"github.com/takuya911/go_pf/services/user/usecase/repository"
@@ -41,10 +42,10 @@ func (i *userInteractor) Login(ctx context.Context, email string, password strin
 		return nil, nil, err
 	}
 
-	// tokenPair, err := genTokenPair(strconv.FormatInt(u.ID, 10))
-	// if err != nil {
-	// 	return nil, nil, err
-	// }
+	tokenPair, err := genTokenPair(strconv.FormatInt(user.ID, 10))
+	if err != nil {
+		return nil, nil, err
+	}
 
-	return user, &domain.TokenPair{}, nil
+	return user, tokenPair, nil
 }

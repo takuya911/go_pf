@@ -2,5 +2,6 @@ package domain
 
 // TokenPair struct
 type TokenPair struct {
-	IDToken string
+	IDToken      string
+	RefreshToken string
 }
