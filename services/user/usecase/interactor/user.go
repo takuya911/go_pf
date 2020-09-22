@@ -2,6 +2,7 @@ package interactor
 
 import (
 	"context"
+	"log"
 
 	"github.com/takuya911/go_pf/services/user/domain"
 	"github.com/takuya911/go_pf/services/user/usecase/repository"
@@ -35,9 +36,10 @@ func (i *userInteractor) Login(ctx context.Context, email string, password strin
 		return nil, nil, err
 	}
 
-	// if err := compareHashAndPass(u.EncryptedPassword, pass); err != nil {
-	// 	return nil, nil, status.Errorf(codes.Unauthenticated, err.Error())
-	// }
+	if err := compareHashAndPass(user.Password, password); err != nil {
+		log.Println(err)
+		return nil, nil, err
+	}
 
 	// tokenPair, err := genTokenPair(strconv.FormatInt(u.ID, 10))
 	// if err != nil {

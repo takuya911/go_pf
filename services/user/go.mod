@@ -11,6 +11,7 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 	github.com/takuya911/gRPC_sample/user v0.0.0-20200914231154-fec4c89c3021
 	github.com/takuya911/mcrsvc_user v0.0.0-20200912024907-0b344554af3b
+	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a
 	google.golang.org/grpc v1.32.0
 	google.golang.org/protobuf v1.25.0
 )
