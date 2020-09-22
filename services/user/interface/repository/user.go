@@ -18,7 +18,8 @@ func NewUserRepository(conn *gorm.DB) *userRepository {
 
 func (r *userRepository) GetUserByID(ctx context.Context, userID int64) (*domain.User, error) {
 	var user domain.User
-	r.Conn.First(&user, userID)
-	// If you return errors here, the connection will be lost.
+	if rs := r.Conn.First(&user, userID); rs.Error != nil {
+		return nil, rs.Error
+	}
 	return &user, nil
 }

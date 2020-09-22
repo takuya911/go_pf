@@ -26,10 +26,8 @@ func (c *userController) GetUserByID(ctx context.Context, in *pb.GetUserForm) (*
 
 	result, err := c.userInteractor.GetUserByID(ctx, userID)
 	if err != nil {
-		log.Fatal(err)
-	}
-	if result.ID == 0 {
-		return &pb.User{}, errors.BadRequestError
+		log.Println(err)
+		return nil, err
 	}
 	return convUserProto(result)
 }
