@@ -2,7 +2,6 @@ package interactor
 
 import (
 	"context"
-	"log"
 	"strconv"
 
 	"github.com/takuya911/go_pf/services/user/domain"
@@ -38,7 +37,6 @@ func (i *userInteractor) Login(ctx context.Context, email string, password strin
 	}
 
 	if err := compareHashAndPass(user.Password, password); err != nil {
-		log.Println(err)
 		return nil, nil, err
 	}
 

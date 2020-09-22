@@ -2,7 +2,6 @@ package controller
 
 import (
 	"context"
-	"log"
 
 	"github.com/takuya911/go_pf/services/user/errors"
 	"github.com/takuya911/go_pf/services/user/interface/usecase"
@@ -26,7 +25,6 @@ func (c *userController) GetUserByID(ctx context.Context, in *pb.GetUserForm) (*
 
 	result, err := c.userInteractor.GetUserByID(ctx, userID)
 	if err != nil {
-		log.Println(err)
 		return nil, err
 	}
 	return convUserProto(result)
@@ -36,7 +34,6 @@ func (c *userController) Login(ctx context.Context, in *pb.LoginReq) (*pb.LoginR
 	user, token, err := c.userInteractor.Login(ctx, in.Email, in.Password)
 
 	if err != nil {
-		log.Println(err)
 		return nil, err
 	}
 	userproto, err := convUserProto(user)
