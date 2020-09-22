@@ -9,4 +9,5 @@ import (
 // UserUsecase interface
 type UserUsecase interface {
 	GetUserByID(ctx context.Context, userID int64) (*domain.User, error)
+	Login(ctx context.Context, email string, password string) (*domain.User, *domain.TokenPair, error)
 }

@@ -2,9 +2,9 @@ scalar Time
 extend type Query {
   getUserById(input:getUserForm!): User
 }
-# extend type Mutation {
-#   createUser(input: CreateUser!): User!
-# }
+extend type Mutation {
+  login(input: LoginInput!): LoginPayload!
+}
 
 input getUserForm{
   id:ID!
@@ -20,9 +20,17 @@ extend type User {
   deletedAt: Time!
 }
 
-# input CreateUser {
-#   id: ID!
-#   name: String!
-#   email: String!
-#   password: String!
-# }
+type TokenPair {
+  idToken: String!
+  refreshToken: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type LoginPayload {
+  user: User!
+  tokenPair: TokenPair!
+}

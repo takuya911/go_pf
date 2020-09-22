@@ -2,6 +2,7 @@ package interactor
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/takuya911/go_pf/services/user/domain"
 	"github.com/takuya911/go_pf/services/user/usecase/repository"
@@ -27,4 +28,22 @@ func (i *userInteractor) GetUserByID(ctx context.Context, userID int64) (*domain
 		return nil, err
 	}
 	return result, nil
+}
+
+func (i *userInteractor) Login(ctx context.Context, email string, password string) (*domain.User, *domain.TokenPair, error) {
+	user, err := i.userRepository.GetUserByEmail(ctx, email)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	if err := compareHashAndPass(user.Password, password); err != nil {
+		return nil, nil, err
+	}
+
+	tokenPair, err := genTokenPair(strconv.FormatInt(user.ID, 10))
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return user, tokenPair, nil
 }

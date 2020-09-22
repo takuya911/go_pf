@@ -30,3 +30,9 @@ func convUserProto(u *domain.User) (*pb.User, error) {
 		DeletedAt: deletedAt,
 	}, nil
 }
+
+func convTokenPairProto(t *domain.TokenPair) *pb.TokenPair {
+	return &pb.TokenPair{
+		IdToken: t.IDToken,
+	}
+}
