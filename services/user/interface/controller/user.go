@@ -33,5 +33,15 @@ func (c *userController) GetUserByID(ctx context.Context, in *pb.GetUserForm) (*
 }
 
 func (c *userController) Login(ctx context.Context, in *pb.LoginReq) (*pb.LoginRes, error) {
-	return &pb.LoginRes{}, nil
+	user, token, err := c.userInteractor.Login(ctx, in.Email, in.Password)
+
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+	userproto, err := convUserProto(user)
+	if err != nil {
+		return nil, err
+	}
+	return &pb.LoginRes{User: userproto, TokenPair: convTokenPairProto(token)}, nil
 }

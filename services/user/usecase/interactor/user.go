@@ -28,3 +28,7 @@ func (i *userInteractor) GetUserByID(ctx context.Context, userID int64) (*domain
 	}
 	return result, nil
 }
+
+func (i *userInteractor) Login(ctx context.Context, email string, password string) (*domain.User, *domain.TokenPair, error) {
+	return &domain.User{}, &domain.TokenPair{}, nil
+}
