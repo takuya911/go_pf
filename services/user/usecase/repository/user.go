@@ -9,4 +9,5 @@ import (
 // UserRepository interface
 type UserRepository interface {
 	GetUserByID(ctx context.Context, userID int64) (*domain.User, error)
+	GetUserByEmail(ctx context.Context, email string) (*domain.User, error)
 }

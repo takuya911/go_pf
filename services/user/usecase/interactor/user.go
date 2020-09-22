@@ -30,5 +30,19 @@ func (i *userInteractor) GetUserByID(ctx context.Context, userID int64) (*domain
 }
 
 func (i *userInteractor) Login(ctx context.Context, email string, password string) (*domain.User, *domain.TokenPair, error) {
-	return &domain.User{}, &domain.TokenPair{}, nil
+	user, err := i.userRepository.GetUserByEmail(ctx, email)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	// if err := compareHashAndPass(u.EncryptedPassword, pass); err != nil {
+	// 	return nil, nil, status.Errorf(codes.Unauthenticated, err.Error())
+	// }
+
+	// tokenPair, err := genTokenPair(strconv.FormatInt(u.ID, 10))
+	// if err != nil {
+	// 	return nil, nil, err
+	// }
+
+	return user, &domain.TokenPair{}, nil
 }

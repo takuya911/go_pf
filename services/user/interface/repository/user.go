@@ -23,3 +23,11 @@ func (r *userRepository) GetUserByID(ctx context.Context, userID int64) (*domain
 	}
 	return &user, nil
 }
+
+func (r *userRepository) GetUserByEmail(ctx context.Context, email string) (*domain.User, error) {
+	var user domain.User
+	if rs := r.Conn.Where("email = ?", email).First(&user); rs.Error != nil {
+		return nil, rs.Error
+	}
+	return &user, nil
+}
