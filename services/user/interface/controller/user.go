@@ -3,6 +3,7 @@ package controller
 import (
 	"context"
 
+	"github.com/takuya911/go_pf/services/user/domain"
 	"github.com/takuya911/go_pf/services/user/errors"
 	"github.com/takuya911/go_pf/services/user/interface/usecase"
 	pb "github.com/takuya911/go_pf/services/user/proto"
@@ -44,8 +45,30 @@ func (c *userController) Login(ctx context.Context, in *pb.LoginReq) (*pb.LoginR
 }
 
 func (c *userController) CreateUser(stream pb.UserService_CreateUserServer) error {
+	ctx := stream.Context()
+
+	request, err := stream.Recv()
+	if err != nil {
+		return err
+	}
+	user := &domain.User{
+		Name:     request.Name,
+		Email:    request.Email,
+		Password: request.Password,
+	}
+
+	token, err := c.userInteractor.CreateUser(ctx, user)
+	if err != nil {
+		return err
+	}
+
+	pbUser, err := convUserProto(user)
+	if err != nil {
+		return err
+	}
+
 	return stream.SendAndClose(&pb.CreateUserRes{
-		User:      &pb.User{},
-		TokenPair: &pb.TokenPair{},
+		User:      pbUser,
+		TokenPair: convTokenPairProto(token),
 	})
 }
