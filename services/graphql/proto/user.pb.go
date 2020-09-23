@@ -337,6 +337,124 @@ func (x *TokenPair) GetRefreshToken() string {
 	return ""
 }
 
+type CreateUserReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name     string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Email    string `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+}
+
+func (x *CreateUserReq) Reset() {
+	*x = CreateUserReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_user_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateUserReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUserReq) ProtoMessage() {}
+
+func (x *CreateUserReq) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUserReq.ProtoReflect.Descriptor instead.
+func (*CreateUserReq) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CreateUserReq) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateUserReq) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *CreateUserReq) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+type CreateUserRes struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	User      *User      `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	TokenPair *TokenPair `protobuf:"bytes,2,opt,name=token_pair,json=tokenPair,proto3" json:"token_pair,omitempty"`
+}
+
+func (x *CreateUserRes) Reset() {
+	*x = CreateUserRes{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_user_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateUserRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateUserRes) ProtoMessage() {}
+
+func (x *CreateUserRes) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateUserRes.ProtoReflect.Descriptor instead.
+func (*CreateUserRes) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *CreateUserRes) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+func (x *CreateUserRes) GetTokenPair() *TokenPair {
+	if x != nil {
+		return x.TokenPair
+	}
+	return nil
+}
+
 var File_user_proto protoreflect.FileDescriptor
 
 var file_user_proto_rawDesc = []byte{
@@ -376,14 +494,29 @@ var file_user_proto_rawDesc = []byte{
 	0x65, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x69, 0x64, 0x54, 0x6f, 0x6b, 0x65,
 	0x6e, 0x12, 0x23, 0x0a, 0x0d, 0x72, 0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x5f, 0x74, 0x6f, 0x6b,
 	0x65, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x72, 0x65, 0x66, 0x72, 0x65, 0x73,
-	0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x32, 0x66, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x2e, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72,
-	0x42, 0x79, 0x49, 0x44, 0x12, 0x11, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x55,
-	0x73, 0x65, 0x72, 0x46, 0x6f, 0x72, 0x6d, 0x1a, 0x0a, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55,
-	0x73, 0x65, 0x72, 0x22, 0x00, 0x12, 0x27, 0x0a, 0x05, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x12, 0x0e,
-	0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x71, 0x1a, 0x0e,
-	0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x22, 0x55, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x65,
+	0x6d, 0x61, 0x69, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69,
+	0x6c, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x5f, 0x0a,
+	0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x12, 0x1e,
+	0x0a, 0x04, 0x75, 0x73, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0a, 0x2e, 0x75,
+	0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x52, 0x04, 0x75, 0x73, 0x65, 0x72, 0x12, 0x2e,
+	0x0a, 0x0a, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x5f, 0x70, 0x61, 0x69, 0x72, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x50,
+	0x61, 0x69, 0x72, 0x52, 0x09, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x50, 0x61, 0x69, 0x72, 0x32, 0xa0,
+	0x01, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x2e,
+	0x0a, 0x0b, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x42, 0x79, 0x49, 0x44, 0x12, 0x11, 0x2e,
+	0x75, 0x73, 0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x46, 0x6f, 0x72, 0x6d,
+	0x1a, 0x0a, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x22, 0x00, 0x12, 0x27,
+	0x0a, 0x05, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x12, 0x0e, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x4c,
+	0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x71, 0x1a, 0x0e, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x4c,
+	0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x12, 0x38, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x55, 0x73, 0x65, 0x72, 0x12, 0x13, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x1a, 0x13, 0x2e, 0x75, 0x73, 0x65,
+	0x72, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x28,
+	0x01, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -398,30 +531,36 @@ func file_user_proto_rawDescGZIP() []byte {
 	return file_user_proto_rawDescData
 }
 
-var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_user_proto_goTypes = []interface{}{
 	(*GetUserForm)(nil),         // 0: user.GetUserForm
 	(*User)(nil),                // 1: user.User
 	(*LoginReq)(nil),            // 2: user.LoginReq
 	(*LoginRes)(nil),            // 3: user.LoginRes
 	(*TokenPair)(nil),           // 4: user.TokenPair
-	(*timestamp.Timestamp)(nil), // 5: google.protobuf.Timestamp
+	(*CreateUserReq)(nil),       // 5: user.CreateUserReq
+	(*CreateUserRes)(nil),       // 6: user.CreateUserRes
+	(*timestamp.Timestamp)(nil), // 7: google.protobuf.Timestamp
 }
 var file_user_proto_depIdxs = []int32{
-	5, // 0: user.User.createdAt:type_name -> google.protobuf.Timestamp
-	5, // 1: user.User.updatedAt:type_name -> google.protobuf.Timestamp
-	5, // 2: user.User.deletedAt:type_name -> google.protobuf.Timestamp
-	1, // 3: user.LoginRes.user:type_name -> user.User
-	4, // 4: user.LoginRes.token_pair:type_name -> user.TokenPair
-	0, // 5: user.UserService.GetUserByID:input_type -> user.GetUserForm
-	2, // 6: user.UserService.Login:input_type -> user.LoginReq
-	1, // 7: user.UserService.GetUserByID:output_type -> user.User
-	3, // 8: user.UserService.Login:output_type -> user.LoginRes
-	7, // [7:9] is the sub-list for method output_type
-	5, // [5:7] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	7,  // 0: user.User.createdAt:type_name -> google.protobuf.Timestamp
+	7,  // 1: user.User.updatedAt:type_name -> google.protobuf.Timestamp
+	7,  // 2: user.User.deletedAt:type_name -> google.protobuf.Timestamp
+	1,  // 3: user.LoginRes.user:type_name -> user.User
+	4,  // 4: user.LoginRes.token_pair:type_name -> user.TokenPair
+	1,  // 5: user.CreateUserRes.user:type_name -> user.User
+	4,  // 6: user.CreateUserRes.token_pair:type_name -> user.TokenPair
+	0,  // 7: user.UserService.GetUserByID:input_type -> user.GetUserForm
+	2,  // 8: user.UserService.Login:input_type -> user.LoginReq
+	5,  // 9: user.UserService.CreateUser:input_type -> user.CreateUserReq
+	1,  // 10: user.UserService.GetUserByID:output_type -> user.User
+	3,  // 11: user.UserService.Login:output_type -> user.LoginRes
+	6,  // 12: user.UserService.CreateUser:output_type -> user.CreateUserRes
+	10, // [10:13] is the sub-list for method output_type
+	7,  // [7:10] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }
@@ -490,6 +629,30 @@ func file_user_proto_init() {
 				return nil
 			}
 		}
+		file_user_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateUserReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_user_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateUserRes); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -497,7 +660,7 @@ func file_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_user_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -525,6 +688,7 @@ const _ = grpc.SupportPackageIsVersion6
 type UserServiceClient interface {
 	GetUserByID(ctx context.Context, in *GetUserForm, opts ...grpc.CallOption) (*User, error)
 	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginRes, error)
+	CreateUser(ctx context.Context, opts ...grpc.CallOption) (UserService_CreateUserClient, error)
 }
 
 type userServiceClient struct {
@@ -553,10 +717,45 @@ func (c *userServiceClient) Login(ctx context.Context, in *LoginReq, opts ...grp
 	return out, nil
 }
 
+func (c *userServiceClient) CreateUser(ctx context.Context, opts ...grpc.CallOption) (UserService_CreateUserClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_UserService_serviceDesc.Streams[0], "/user.UserService/CreateUser", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &userServiceCreateUserClient{stream}
+	return x, nil
+}
+
+type UserService_CreateUserClient interface {
+	Send(*CreateUserReq) error
+	CloseAndRecv() (*CreateUserRes, error)
+	grpc.ClientStream
+}
+
+type userServiceCreateUserClient struct {
+	grpc.ClientStream
+}
+
+func (x *userServiceCreateUserClient) Send(m *CreateUserReq) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *userServiceCreateUserClient) CloseAndRecv() (*CreateUserRes, error) {
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	m := new(CreateUserRes)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 type UserServiceServer interface {
 	GetUserByID(context.Context, *GetUserForm) (*User, error)
 	Login(context.Context, *LoginReq) (*LoginRes, error)
+	CreateUser(UserService_CreateUserServer) error
 }
 
 // UnimplementedUserServiceServer can be embedded to have forward compatible implementations.
@@ -568,6 +767,9 @@ func (*UnimplementedUserServiceServer) GetUserByID(context.Context, *GetUserForm
 }
 func (*UnimplementedUserServiceServer) Login(context.Context, *LoginReq) (*LoginRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (*UnimplementedUserServiceServer) CreateUser(UserService_CreateUserServer) error {
+	return status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
 }
 
 func RegisterUserServiceServer(s *grpc.Server, srv UserServiceServer) {
@@ -610,6 +812,32 @@ func _UserService_Login_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_CreateUser_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(UserServiceServer).CreateUser(&userServiceCreateUserServer{stream})
+}
+
+type UserService_CreateUserServer interface {
+	SendAndClose(*CreateUserRes) error
+	Recv() (*CreateUserReq, error)
+	grpc.ServerStream
+}
+
+type userServiceCreateUserServer struct {
+	grpc.ServerStream
+}
+
+func (x *userServiceCreateUserServer) SendAndClose(m *CreateUserRes) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *userServiceCreateUserServer) Recv() (*CreateUserReq, error) {
+	m := new(CreateUserReq)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 var _UserService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "user.UserService",
 	HandlerType: (*UserServiceServer)(nil),
@@ -623,6 +851,12 @@ var _UserService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _UserService_Login_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "CreateUser",
+			Handler:       _UserService_CreateUser_Handler,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "user.proto",
 }
