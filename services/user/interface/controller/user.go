@@ -42,3 +42,10 @@ func (c *userController) Login(ctx context.Context, in *pb.LoginReq) (*pb.LoginR
 	}
 	return &pb.LoginRes{User: userproto, TokenPair: convTokenPairProto(token)}, nil
 }
+
+func (c *userController) CreateUser(stream pb.UserService_CreateUserServer) error {
+	return stream.SendAndClose(&pb.CreateUserRes{
+		User:      &pb.User{},
+		TokenPair: &pb.TokenPair{},
+	})
+}
