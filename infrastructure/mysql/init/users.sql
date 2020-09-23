@@ -4,6 +4,5 @@ CREATE TABLE `users` (
   `email` varchar(511) NOT NULL,
   `password` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `deleted_at` datetime DEFAULT NULL
-);
+  `updated_at` datetime DEFAULT NULL
+  );

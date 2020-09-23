@@ -58,10 +58,6 @@ github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7
 github.com/envoyproxy/protoc-gen-validate v0.3.0 h1:Y2J74o+yAfcD8jpqtkLnUqRo+yshLr4eR1WPYGX0cic=
 github.com/envoyproxy/protoc-gen-validate v0.3.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7+kN2VEUnK/pcBlmesArF7c=
 github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5/go.mod h1:a2zkGnVExMxdzMo3M0Hi/3sEU+cWnZpSni0O6/Yb/P0=
-github.com/ezio1119/fishapp-api-gateway v0.0.0-20200702123320-0a868a39a864 h1:t38l9/zpdk3FnbBa0WL6yhKSyKHVh293tltN7WSq4OA=
-github.com/ezio1119/fishapp-api-gateway v0.0.0-20200702123320-0a868a39a864/go.mod h1:M/8jsQvyXAPNDG1NzpwGZlG9urqeIdWNPsx/kM2BIvs=
-github.com/ezio1119/fishapp-user v0.0.0-20200701083907-f27f80bfed1a h1:Da8u1SVnk/o++dQ+SZlfaOuevWNxHfE2p6tpSB7KndM=
-github.com/ezio1119/fishapp-user v0.0.0-20200701083907-f27f80bfed1a/go.mod h1:3cRccHaTWIItZAke5Kdpu74I8dyXuoIi+VNZzGU145k=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
 github.com/fsnotify/fsnotify v1.4.7 h1:IXs+QLmnXW2CcXuY+8Mzv/fWEsPGWxqefPtCP5CnV9I=
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
@@ -292,6 +288,7 @@ github.com/takuya911/go_pf v0.0.0-20200915102620-063685f9cd5b h1:ktm/QxC41ToxlM9
 github.com/takuya911/go_pf v0.0.0-20200916011022-5b475069edbd h1:xtrDViJctkxd+LYueSLd/b5hJ1M2QpYB8Qnk3j8mNCQ=
 github.com/takuya911/go_pf v0.0.0-20200918094546-33df3408048b h1:nS2b4d5LWARTzApzXwuBZrKatzZeJzCmgy702MLxr5k=
 github.com/takuya911/go_pf v0.0.0-20200921121628-74a4c2f8f698 h1:6fl2PgIpAZA6Dm+DvUUK9HAi01P04MKCCyIHgMEq/do=
+github.com/takuya911/go_pf v0.0.0-20200922112456-80561a12d34a h1:a64MjQVLXaB53GbiIn82DNdAuURxx+/RqyNzJwlXZz8=
 github.com/takuya911/golang-study v0.0.0-20200825011709-537b2aa11b88 h1:YwlFZA1JwMTa0Yn/IA2K6kOLMGOZRgo4epfx9lFD+e8=
 github.com/takuya911/golang-study v0.0.0-20200825011709-537b2aa11b88/go.mod h1:bmZi3mJC2uyHK45Do2iXS2EE1I14kQE6FF/Jfgju4jE=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20190109142713-0ad062ec5ee5/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=

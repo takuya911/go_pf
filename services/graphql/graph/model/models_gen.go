@@ -6,6 +6,17 @@ import (
 	user "github.com/takuya911/go_pf/services/graphql/proto"
 )
 
+type CreateUserInput struct {
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type CreateUserPayload struct {
+	User      *user.User      `json:"user"`
+	TokenPair *user.TokenPair `json:"tokenPair"`
+}
+
 type LoginInput struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`

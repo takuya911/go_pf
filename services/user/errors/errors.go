@@ -3,6 +3,6 @@ package errors
 import "errors"
 
 var (
-	// BadRequestError ...
-	BadRequestError = errors.New("bad request error...")
+	PasswordFaultError = errors.New("password is incorrect")
+	UserAlreadyExists  = errors.New("user is already exist, please register by other email")
 )

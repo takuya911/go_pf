@@ -10,4 +10,6 @@ import (
 type UserRepository interface {
 	GetUserByID(ctx context.Context, userID int64) (*domain.User, error)
 	GetUserByEmail(ctx context.Context, email string) (*domain.User, error)
+	CreateUser(ctx context.Context, user *domain.User) error
+	UserAlreadyExist(tx context.Context, email string) (bool, error)
 }

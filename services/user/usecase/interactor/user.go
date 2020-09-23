@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/takuya911/go_pf/services/user/domain"
+	"github.com/takuya911/go_pf/services/user/errors"
 	"github.com/takuya911/go_pf/services/user/usecase/repository"
 )
 
@@ -20,6 +21,7 @@ func NewUserInteractor(u repository.UserRepository) *userInteractor {
 // UserUsecase interface
 type UserUsecase interface {
 	GetUserByID(ctx context.Context, userID int64) (*domain.User, error)
+	CreateUser(ctx context.Context, user *domain.User) (*domain.TokenPair, error)
 }
 
 func (i *userInteractor) GetUserByID(ctx context.Context, userID int64) (*domain.User, error) {
@@ -46,4 +48,29 @@ func (i *userInteractor) Login(ctx context.Context, email string, password strin
 	}
 
 	return user, tokenPair, nil
+}
+
+func (i *userInteractor) CreateUser(ctx context.Context, user *domain.User) (*domain.TokenPair, error) {
+
+	// Make sure user doesn't exist
+	alreadyExist, err := i.userRepository.UserAlreadyExist(ctx, user.Email)
+	if err != nil {
+		return nil, err
+	}
+	if alreadyExist {
+		return nil, errors.UserAlreadyExists
+	}
+
+	encryptedPass, err := genEncryptedPass(user.Password)
+	if err != nil {
+		return nil, err
+	}
+	user.Password = encryptedPass
+
+	if err := i.userRepository.CreateUser(ctx, user); err != nil {
+		return nil, err
+	}
+
+	return genTokenPair(strconv.FormatInt(user.ID, 10))
+
 }
