@@ -6,6 +6,7 @@ import "google/protobuf/timestamp.proto";
 service UserService {
   rpc GetUserByID (GetUserForm) returns (User) {}
   rpc Login(LoginReq) returns (LoginRes);
+  rpc CreateUser(stream CreateUserReq) returns (CreateUserRes);
 }
 
 message GetUserForm {
@@ -35,4 +36,14 @@ message LoginRes {
 message TokenPair{
   string id_token = 1;
   string refresh_token = 2;
+}
+
+message CreateUserReq {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+}
+message CreateUserRes {
+  User user = 1;
+  TokenPair token_pair = 2;
 }
