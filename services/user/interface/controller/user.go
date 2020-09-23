@@ -21,7 +21,7 @@ func NewUserController(u usecase.UserUsecase) pb.UserServiceServer {
 func (c *userController) GetUserByID(ctx context.Context, in *pb.GetUserForm) (*pb.User, error) {
 	userID := in.GetId()
 	if userID == 0 {
-		return nil, errors.BadRequestError
+		return nil, errors.PasswordFaultError
 	}
 
 	result, err := c.userInteractor.GetUserByID(ctx, userID)
