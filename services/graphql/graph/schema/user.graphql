@@ -18,7 +18,6 @@ extend type User {
   password: String!
   createdAt: Time!
   updatedAt: Time!
-  deletedAt: Time!
 }
 
 type TokenPair {

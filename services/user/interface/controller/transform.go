@@ -11,11 +11,8 @@ func convUserProto(u *domain.User) (*pb.User, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	updatedAt, err := ptypes.TimestampProto(u.UpdatedAt)
-	if err != nil {
-		return nil, err
-	}
-	deletedAt, err := ptypes.TimestampProto(u.DeletedAt)
 	if err != nil {
 		return nil, err
 	}
@@ -27,7 +24,6 @@ func convUserProto(u *domain.User) (*pb.User, error) {
 		Password:  u.Password,
 		CreatedAt: createdAt,
 		UpdatedAt: updatedAt,
-		DeletedAt: deletedAt,
 	}, nil
 }
 

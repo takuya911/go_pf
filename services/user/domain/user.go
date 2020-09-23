@@ -12,5 +12,4 @@ type User struct {
 	Password  string    `json:"password" validate:"min=6,max=75"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
-	DeletedAt time.Time `json:"deleted_at"`
 }

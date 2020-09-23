@@ -20,7 +20,6 @@ message User {
   string password = 4;
   google.protobuf.Timestamp createdAt = 5;
   google.protobuf.Timestamp updatedAt = 6;
-  google.protobuf.Timestamp deletedAt = 7;
 }
 
 message LoginReq {
