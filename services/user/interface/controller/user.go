@@ -75,20 +75,43 @@ func (c *userController) CreateUser(stream pb.UserService_CreateUserServer) erro
 
 func (c *userController) UpdateUser(stream pb.UserService_UpdateUserServer) error {
 	// token使って認証したい(フロント作ったら)
+	ctx := stream.Context()
+
 	req, err := stream.Recv()
 	if err != nil {
 		return err
 	}
 
-	beforeUser := &pb.User{
-		Id:       req.Id,
+	// 更新前ユーザーの取得
+	beforeUser, err := c.userInteractor.GetUserByID(ctx, req.Id)
+	if err != nil {
+		return err
+	}
+
+	formUser := &domain.User{
+		ID:       req.Id,
 		Name:     req.Name,
 		Email:    req.Email,
 		Password: req.Password,
 	}
 
+	afterUser, err := c.userInteractor.UpdateUser(ctx, formUser)
+	if err != nil {
+		return err
+	}
+
+	// 変換
+	beforeUserProto, err := convUserProto(beforeUser)
+	if err != nil {
+		return err
+	}
+	afterUserProto, err := convUserProto(afterUser)
+	if err != nil {
+		return err
+	}
+
 	return stream.SendAndClose(&pb.UpdateUserRes{
-		BeforeUser: beforeUser,
-		AfterUser:  &pb.User{},
+		BeforeUser: beforeUserProto,
+		AfterUser:  afterUserProto,
 	})
 }

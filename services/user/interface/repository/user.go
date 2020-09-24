@@ -39,6 +39,13 @@ func (r *userRepository) CreateUser(ctx context.Context, user *domain.User) erro
 	return nil
 }
 
+func (r *userRepository) UpdateUser(ctx context.Context, user *domain.User) error {
+	if rs := r.Conn.Save(&user); rs.Error != nil {
+		return rs.Error
+	}
+	return nil
+}
+
 func (r *userRepository) UserAlreadyExist(tx context.Context, email string) (bool, error) {
 	var user domain.User
 	if rs := r.Conn.Where("email = ?", email).Find(&user); rs.Error != nil {
