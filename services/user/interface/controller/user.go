@@ -72,3 +72,21 @@ func (c *userController) CreateUser(stream pb.UserService_CreateUserServer) erro
 		TokenPair: convTokenPairProto(token),
 	})
 }
+
+func (c *userController) UpdateUser(stream pb.UserService_UpdateUserServer) error {
+
+	request, err := stream.Recv()
+	if err != nil {
+		return err
+	}
+	beforeUser := &pb.User{
+		Name:     request.Name,
+		Email:    request.Email,
+		Password: request.Password,
+	}
+
+	return stream.SendAndClose(&pb.UpdateUserRes{
+		BeforeUser: beforeUser,
+		AfterUser:  &pb.User{},
+	})
+}

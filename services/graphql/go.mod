@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/99designs/gqlgen v0.12.2
+	github.com/ezio1119/fishapp-user v0.0.0-20200701083907-f27f80bfed1a
 	github.com/golang/protobuf v1.4.2
 	github.com/nats-io/stan.go v0.7.0
 	github.com/takuya911/golang-study v0.0.0-20200825011709-537b2aa11b88
