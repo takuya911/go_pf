@@ -368,6 +368,7 @@ type CreateUserPayload {
   tokenPair: TokenPair!
 }
 input UpdateUserInput {
+  id:ID!
   email: String!
   name: String!
   password: String!
@@ -2327,6 +2328,14 @@ func (ec *executionContext) unmarshalInputUpdateUserInput(ctx context.Context, o
 
 	for k, v := range asMap {
 		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithFieldInputContext(ctx, graphql.NewFieldInputWithField("id"))
+			it.ID, err = ec.unmarshalNID2int64(ctx, v)
+			if err != nil {
+				return it, err
+			}
 		case "email":
 			var err error
 

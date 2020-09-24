@@ -47,14 +47,14 @@ func (c *userController) Login(ctx context.Context, in *pb.LoginReq) (*pb.LoginR
 func (c *userController) CreateUser(stream pb.UserService_CreateUserServer) error {
 	ctx := stream.Context()
 
-	request, err := stream.Recv()
+	req, err := stream.Recv()
 	if err != nil {
 		return err
 	}
 	user := &domain.User{
-		Name:     request.Name,
-		Email:    request.Email,
-		Password: request.Password,
+		Name:     req.Name,
+		Email:    req.Email,
+		Password: req.Password,
 	}
 
 	token, err := c.userInteractor.CreateUser(ctx, user)
@@ -74,15 +74,17 @@ func (c *userController) CreateUser(stream pb.UserService_CreateUserServer) erro
 }
 
 func (c *userController) UpdateUser(stream pb.UserService_UpdateUserServer) error {
-
-	request, err := stream.Recv()
+	// token使って認証したい(フロント作ったら)
+	req, err := stream.Recv()
 	if err != nil {
 		return err
 	}
+
 	beforeUser := &pb.User{
-		Name:     request.Name,
-		Email:    request.Email,
-		Password: request.Password,
+		Id:       req.Id,
+		Name:     req.Name,
+		Email:    req.Email,
+		Password: req.Password,
 	}
 
 	return stream.SendAndClose(&pb.UpdateUserRes{

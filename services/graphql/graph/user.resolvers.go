@@ -51,6 +51,7 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUse
 
 func (r *mutationResolver) UpdateUser(ctx context.Context, input model.UpdateUserInput) (*model.UpdateUserPayload, error) {
 	req := &user.UpdateUserReq{
+		Id:       input.ID,
 		Name:     input.Name,
 		Email:    input.Email,
 		Password: input.Password,
@@ -73,7 +74,6 @@ func (r *mutationResolver) UpdateUser(ctx context.Context, input model.UpdateUse
 		BeforeUser: res.BeforeUser,
 		AfterUser:  res.AfterUser,
 	}, nil
-
 }
 
 func (r *queryResolver) GetUserByID(ctx context.Context, input model.GetUserForm) (*user.User, error) {

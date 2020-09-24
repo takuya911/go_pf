@@ -47,6 +47,7 @@ type CreateUserPayload {
   tokenPair: TokenPair!
 }
 input UpdateUserInput {
+  id:ID!
   email: String!
   name: String!
   password: String!
