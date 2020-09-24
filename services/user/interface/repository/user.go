@@ -39,11 +39,24 @@ func (r *userRepository) CreateUser(ctx context.Context, user *domain.User) erro
 	return nil
 }
 
-func (r *userRepository) UpdateUser(ctx context.Context, user *domain.User) error {
-	if rs := r.Conn.Save(&user); rs.Error != nil {
-		return rs.Error
+func (r *userRepository) UpdateUser(ctx context.Context, formUser *domain.User) (*domain.User, *domain.User, error) {
+	// update after
+	var aUser domain.User
+	if rs := r.Conn.First(&aUser, formUser.ID); rs.Error != nil {
+		return nil, nil, rs.Error
 	}
-	return nil
+
+	// update
+	if rs := r.Conn.Save(&formUser); rs.Error != nil {
+		return nil, nil, rs.Error
+	}
+
+	// update before
+	var bUser domain.User
+	if rs := r.Conn.First(&bUser, formUser.ID); rs.Error != nil {
+		return nil, nil, rs.Error
+	}
+	return &aUser, &bUser, nil
 }
 
 func (r *userRepository) UserAlreadyExist(tx context.Context, email string) (bool, error) {

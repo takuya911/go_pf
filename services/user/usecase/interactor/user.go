@@ -76,17 +76,27 @@ func (i *userInteractor) CreateUser(ctx context.Context, user *domain.User) (*do
 
 }
 
-func (i *userInteractor) UpdateUser(ctx context.Context, formUser *domain.User) error {
+func (i *userInteractor) UpdateUser(ctx context.Context, formUser *domain.User) (*domain.User, *domain.User, error) {
+	// 存在しないユーザーの場合はerrorを返す
+	alreadyExist, err := i.userRepository.UserAlreadyExist(ctx, formUser.Email)
+	if err != nil {
+		return nil, nil, err
+	}
+	if !alreadyExist {
+		return nil, nil, errors.UserDoesNotExists
+	}
+
 	// password 暗号化
 	encryptedPass, err := genEncryptedPass(formUser.Password)
 	if err != nil {
-		return err
+		return nil, nil, err
 	}
 	formUser.Password = encryptedPass
 
 	// update
-	if err := i.userRepository.UpdateUser(ctx, formUser); err != nil {
-		return err
+	bUser, aUser, err := i.userRepository.UpdateUser(ctx, formUser)
+	if err != nil {
+		return nil, nil, err
 	}
-	return nil
+	return bUser, aUser, nil
 }

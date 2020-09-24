@@ -82,12 +82,6 @@ func (c *userController) UpdateUser(stream pb.UserService_UpdateUserServer) erro
 		return err
 	}
 
-	// 更新前ユーザーの取得
-	beforeUser, err := c.userInteractor.GetUserByID(ctx, req.Id)
-	if err != nil {
-		return err
-	}
-
 	formUser := &domain.User{
 		ID:       req.Id,
 		Name:     req.Name,
@@ -95,29 +89,24 @@ func (c *userController) UpdateUser(stream pb.UserService_UpdateUserServer) erro
 		Password: req.Password,
 	}
 
-	// 更新
-	if err = c.userInteractor.UpdateUser(ctx, formUser); err != nil {
-		return err
-	}
-
-	// 更新前ユーザーの取得
-	afterUser, err := c.userInteractor.GetUserByID(ctx, req.Id)
+	// update
+	bUser, aUser, err := c.userInteractor.UpdateUser(ctx, formUser)
 	if err != nil {
 		return err
 	}
 
 	// 変換
-	beforeUserProto, err := convUserProto(beforeUser)
+	bUserProto, err := convUserProto(bUser)
 	if err != nil {
 		return err
 	}
-	afterUserProto, err := convUserProto(afterUser)
+	aUserProto, err := convUserProto(aUser)
 	if err != nil {
 		return err
 	}
 
 	return stream.SendAndClose(&pb.UpdateUserRes{
-		BeforeUser: beforeUserProto,
-		AfterUser:  afterUserProto,
+		BeforeUser: bUserProto,
+		AfterUser:  aUserProto,
 	})
 }
