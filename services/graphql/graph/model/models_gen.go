@@ -27,6 +27,18 @@ type LoginPayload struct {
 	TokenPair *user.TokenPair `json:"tokenPair"`
 }
 
+type UpdateUserInput struct {
+	ID       int64  `json:"id"`
+	Email    string `json:"email"`
+	Name     string `json:"name"`
+	Password string `json:"password"`
+}
+
+type UpdateUserPayload struct {
+	BeforeUser *user.User `json:"beforeUser"`
+	AfterUser  *user.User `json:"afterUser"`
+}
+
 type GetUserForm struct {
 	ID int64 `json:"id"`
 }

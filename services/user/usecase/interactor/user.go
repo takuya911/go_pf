@@ -22,6 +22,7 @@ func NewUserInteractor(u repository.UserRepository) *userInteractor {
 type UserUsecase interface {
 	GetUserByID(ctx context.Context, userID int64) (*domain.User, error)
 	CreateUser(ctx context.Context, user *domain.User) (*domain.TokenPair, error)
+	UpdateUser(ctx context.Context, user *domain.User) error
 }
 
 func (i *userInteractor) GetUserByID(ctx context.Context, userID int64) (*domain.User, error) {
@@ -73,4 +74,29 @@ func (i *userInteractor) CreateUser(ctx context.Context, user *domain.User) (*do
 
 	return genTokenPair(strconv.FormatInt(user.ID, 10))
 
+}
+
+func (i *userInteractor) UpdateUser(ctx context.Context, formUser *domain.User) (*domain.User, *domain.User, error) {
+	// 存在しないユーザーの場合はerrorを返す
+	alreadyExist, err := i.userRepository.UserAlreadyExist(ctx, formUser.Email)
+	if err != nil {
+		return nil, nil, err
+	}
+	if !alreadyExist {
+		return nil, nil, errors.UserDoesNotExists
+	}
+
+	// password 暗号化
+	encryptedPass, err := genEncryptedPass(formUser.Password)
+	if err != nil {
+		return nil, nil, err
+	}
+	formUser.Password = encryptedPass
+
+	// update
+	bUser, aUser, err := i.userRepository.UpdateUser(ctx, formUser)
+	if err != nil {
+		return nil, nil, err
+	}
+	return bUser, aUser, nil
 }

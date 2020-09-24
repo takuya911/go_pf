@@ -5,6 +5,7 @@ extend type Query {
 extend type Mutation {
   login(input: LoginInput!): LoginPayload!
   createUser(input: CreateUserInput!): CreateUserPayload!
+  updateUser(input: UpdateUserInput!): UpdateUserPayload!
 }
 
 input getUserForm{
@@ -44,4 +45,14 @@ input CreateUserInput {
 type CreateUserPayload {
   user: User!
   tokenPair: TokenPair!
+}
+input UpdateUserInput {
+  id:ID!
+  email: String!
+  name: String!
+  password: String!
+}
+type UpdateUserPayload {
+  beforeUser: User!
+  afterUser: User!
 }

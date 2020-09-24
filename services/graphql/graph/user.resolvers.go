@@ -49,6 +49,33 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUse
 	}, nil
 }
 
+func (r *mutationResolver) UpdateUser(ctx context.Context, input model.UpdateUserInput) (*model.UpdateUserPayload, error) {
+	req := &user.UpdateUserReq{
+		Id:       input.ID,
+		Name:     input.Name,
+		Email:    input.Email,
+		Password: input.Password,
+	}
+	stream, err := r.userClient.UpdateUser(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := stream.Send(req); err != nil {
+		return nil, err
+	}
+
+	res, err := stream.CloseAndRecv()
+	if err != nil {
+		return nil, err
+	}
+
+	return &model.UpdateUserPayload{
+		BeforeUser: res.BeforeUser,
+		AfterUser:  res.AfterUser,
+	}, nil
+}
+
 func (r *queryResolver) GetUserByID(ctx context.Context, input model.GetUserForm) (*user.User, error) {
 	request := &user.GetUserForm{
 		Id: input.ID,

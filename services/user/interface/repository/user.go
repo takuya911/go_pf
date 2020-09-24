@@ -39,6 +39,34 @@ func (r *userRepository) CreateUser(ctx context.Context, user *domain.User) erro
 	return nil
 }
 
+func (r *userRepository) UpdateUser(ctx context.Context, formUser *domain.User) (*domain.User, *domain.User, error) {
+	var aUser domain.User
+	var bUser domain.User
+
+	// transaction
+	err := r.Conn.Transaction(func(tx *gorm.DB) error {
+		// update after
+		if rs := tx.First(&aUser, formUser.ID); rs.Error != nil {
+			return rs.Error
+		}
+		// update
+		if rs := tx.Save(&formUser); rs.Error != nil {
+			return rs.Error
+		}
+		// update before
+		if rs := tx.First(&bUser, formUser.ID); rs.Error != nil {
+			return rs.Error
+		}
+		return nil
+	})
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return &aUser, &bUser, nil
+}
+
 func (r *userRepository) UserAlreadyExist(tx context.Context, email string) (bool, error) {
 	var user domain.User
 	if rs := r.Conn.Where("email = ?", email).Find(&user); rs.Error != nil {

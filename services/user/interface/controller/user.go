@@ -47,14 +47,14 @@ func (c *userController) Login(ctx context.Context, in *pb.LoginReq) (*pb.LoginR
 func (c *userController) CreateUser(stream pb.UserService_CreateUserServer) error {
 	ctx := stream.Context()
 
-	request, err := stream.Recv()
+	req, err := stream.Recv()
 	if err != nil {
 		return err
 	}
 	user := &domain.User{
-		Name:     request.Name,
-		Email:    request.Email,
-		Password: request.Password,
+		Name:     req.Name,
+		Email:    req.Email,
+		Password: req.Password,
 	}
 
 	token, err := c.userInteractor.CreateUser(ctx, user)
@@ -70,5 +70,43 @@ func (c *userController) CreateUser(stream pb.UserService_CreateUserServer) erro
 	return stream.SendAndClose(&pb.CreateUserRes{
 		User:      pbUser,
 		TokenPair: convTokenPairProto(token),
+	})
+}
+
+func (c *userController) UpdateUser(stream pb.UserService_UpdateUserServer) error {
+	// token使って認証したい(フロント作ったら)
+	ctx := stream.Context()
+
+	req, err := stream.Recv()
+	if err != nil {
+		return err
+	}
+
+	formUser := &domain.User{
+		ID:       req.Id,
+		Name:     req.Name,
+		Email:    req.Email,
+		Password: req.Password,
+	}
+
+	// update
+	bUser, aUser, err := c.userInteractor.UpdateUser(ctx, formUser)
+	if err != nil {
+		return err
+	}
+
+	// 変換
+	bUserProto, err := convUserProto(bUser)
+	if err != nil {
+		return err
+	}
+	aUserProto, err := convUserProto(aUser)
+	if err != nil {
+		return err
+	}
+
+	return stream.SendAndClose(&pb.UpdateUserRes{
+		BeforeUser: bUserProto,
+		AfterUser:  aUserProto,
 	})
 }
