@@ -95,7 +95,13 @@ func (c *userController) UpdateUser(stream pb.UserService_UpdateUserServer) erro
 		Password: req.Password,
 	}
 
-	afterUser, err := c.userInteractor.UpdateUser(ctx, formUser)
+	// 更新
+	if err = c.userInteractor.UpdateUser(ctx, formUser); err != nil {
+		return err
+	}
+
+	// 更新前ユーザーの取得
+	afterUser, err := c.userInteractor.GetUserByID(ctx, req.Id)
 	if err != nil {
 		return err
 	}

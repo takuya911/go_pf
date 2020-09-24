@@ -22,7 +22,7 @@ func NewUserInteractor(u repository.UserRepository) *userInteractor {
 type UserUsecase interface {
 	GetUserByID(ctx context.Context, userID int64) (*domain.User, error)
 	CreateUser(ctx context.Context, user *domain.User) (*domain.TokenPair, error)
-	UpdateUser(ctx context.Context, user *domain.User) (*domain.User, error)
+	UpdateUser(ctx context.Context, user *domain.User) error
 }
 
 func (i *userInteractor) GetUserByID(ctx context.Context, userID int64) (*domain.User, error) {
@@ -76,24 +76,17 @@ func (i *userInteractor) CreateUser(ctx context.Context, user *domain.User) (*do
 
 }
 
-func (i *userInteractor) UpdateUser(ctx context.Context, formUser *domain.User) (*domain.User, error) {
+func (i *userInteractor) UpdateUser(ctx context.Context, formUser *domain.User) error {
 	// password 暗号化
 	encryptedPass, err := genEncryptedPass(formUser.Password)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	formUser.Password = encryptedPass
 
 	// update
 	if err := i.userRepository.UpdateUser(ctx, formUser); err != nil {
-		return nil, err
+		return err
 	}
-
-	// update後のdata取得
-	afterUser, err := i.userRepository.GetUserByID(ctx, formUser.ID)
-	if err != nil {
-		return nil, err
-	}
-
-	return afterUser, nil
+	return nil
 }
