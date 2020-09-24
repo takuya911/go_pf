@@ -447,6 +447,124 @@ func (x *CreateUserRes) GetTokenPair() *TokenPair {
 	return nil
 }
 
+type UpdateUserReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Email    string `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	Name     string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+}
+
+func (x *UpdateUserReq) Reset() {
+	*x = UpdateUserReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_user_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateUserReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserReq) ProtoMessage() {}
+
+func (x *UpdateUserReq) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserReq.ProtoReflect.Descriptor instead.
+func (*UpdateUserReq) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *UpdateUserReq) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *UpdateUserReq) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateUserReq) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+type UpdateUserRes struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	BeforeUser *User `protobuf:"bytes,1,opt,name=beforeUser,proto3" json:"beforeUser,omitempty"`
+	AfterUser  *User `protobuf:"bytes,2,opt,name=afterUser,proto3" json:"afterUser,omitempty"`
+}
+
+func (x *UpdateUserRes) Reset() {
+	*x = UpdateUserRes{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_user_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateUserRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserRes) ProtoMessage() {}
+
+func (x *UpdateUserRes) ProtoReflect() protoreflect.Message {
+	mi := &file_user_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserRes.ProtoReflect.Descriptor instead.
+func (*UpdateUserRes) Descriptor() ([]byte, []int) {
+	return file_user_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *UpdateUserRes) GetBeforeUser() *User {
+	if x != nil {
+		return x.BeforeUser
+	}
+	return nil
+}
+
+func (x *UpdateUserRes) GetAfterUser() *User {
+	if x != nil {
+		return x.AfterUser
+	}
+	return nil
+}
+
 var File_user_proto protoreflect.FileDescriptor
 
 var file_user_proto_rawDesc = []byte{
@@ -494,17 +612,33 @@ var file_user_proto_rawDesc = []byte{
 	0x75, 0x73, 0x65, 0x72, 0x12, 0x2e, 0x0a, 0x0a, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x5f, 0x70, 0x61,
 	0x69, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e,
 	0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x50, 0x61, 0x69, 0x72, 0x52, 0x09, 0x74, 0x6f, 0x6b, 0x65, 0x6e,
-	0x50, 0x61, 0x69, 0x72, 0x32, 0xa0, 0x01, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72,
-	0x76, 0x69, 0x63, 0x65, 0x12, 0x2e, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x42,
-	0x79, 0x49, 0x44, 0x12, 0x11, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x73,
-	0x65, 0x72, 0x46, 0x6f, 0x72, 0x6d, 0x1a, 0x0a, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73,
-	0x65, 0x72, 0x22, 0x00, 0x12, 0x27, 0x0a, 0x05, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x12, 0x0e, 0x2e,
-	0x75, 0x73, 0x65, 0x72, 0x2e, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x71, 0x1a, 0x0e, 0x2e,
-	0x75, 0x73, 0x65, 0x72, 0x2e, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x12, 0x38, 0x0a,
-	0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x12, 0x13, 0x2e, 0x75, 0x73,
-	0x65, 0x72, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71,
-	0x1a, 0x13, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x55, 0x73,
-	0x65, 0x72, 0x52, 0x65, 0x73, 0x28, 0x01, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x50, 0x61, 0x69, 0x72, 0x22, 0x55, 0x0a, 0x0d, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73,
+	0x65, 0x72, 0x52, 0x65, 0x71, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x12, 0x0a, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
+	0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x65, 0x0a, 0x0d, 0x55,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x12, 0x2a, 0x0a, 0x0a,
+	0x62, 0x65, 0x66, 0x6f, 0x72, 0x65, 0x55, 0x73, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x0a, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x52, 0x0a, 0x62, 0x65,
+	0x66, 0x6f, 0x72, 0x65, 0x55, 0x73, 0x65, 0x72, 0x12, 0x28, 0x0a, 0x09, 0x61, 0x66, 0x74, 0x65,
+	0x72, 0x55, 0x73, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0a, 0x2e, 0x75, 0x73,
+	0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x52, 0x09, 0x61, 0x66, 0x74, 0x65, 0x72, 0x55, 0x73,
+	0x65, 0x72, 0x32, 0xda, 0x01, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x12, 0x2e, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x42, 0x79, 0x49,
+	0x44, 0x12, 0x11, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72,
+	0x46, 0x6f, 0x72, 0x6d, 0x1a, 0x0a, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72,
+	0x22, 0x00, 0x12, 0x27, 0x0a, 0x05, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x12, 0x0e, 0x2e, 0x75, 0x73,
+	0x65, 0x72, 0x2e, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x71, 0x1a, 0x0e, 0x2e, 0x75, 0x73,
+	0x65, 0x72, 0x2e, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x12, 0x38, 0x0a, 0x0a, 0x43,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x12, 0x13, 0x2e, 0x75, 0x73, 0x65, 0x72,
+	0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x1a, 0x13,
+	0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72,
+	0x52, 0x65, 0x73, 0x28, 0x01, 0x12, 0x38, 0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55,
+	0x73, 0x65, 0x72, 0x12, 0x13, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x1a, 0x13, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e,
+	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x28, 0x01, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -519,7 +653,7 @@ func file_user_proto_rawDescGZIP() []byte {
 	return file_user_proto_rawDescData
 }
 
-var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_user_proto_goTypes = []interface{}{
 	(*GetUserForm)(nil),         // 0: user.GetUserForm
 	(*User)(nil),                // 1: user.User
@@ -528,26 +662,32 @@ var file_user_proto_goTypes = []interface{}{
 	(*TokenPair)(nil),           // 4: user.TokenPair
 	(*CreateUserReq)(nil),       // 5: user.CreateUserReq
 	(*CreateUserRes)(nil),       // 6: user.CreateUserRes
-	(*timestamp.Timestamp)(nil), // 7: google.protobuf.Timestamp
+	(*UpdateUserReq)(nil),       // 7: user.UpdateUserReq
+	(*UpdateUserRes)(nil),       // 8: user.UpdateUserRes
+	(*timestamp.Timestamp)(nil), // 9: google.protobuf.Timestamp
 }
 var file_user_proto_depIdxs = []int32{
-	7, // 0: user.User.createdAt:type_name -> google.protobuf.Timestamp
-	7, // 1: user.User.updatedAt:type_name -> google.protobuf.Timestamp
-	1, // 2: user.LoginRes.user:type_name -> user.User
-	4, // 3: user.LoginRes.token_pair:type_name -> user.TokenPair
-	1, // 4: user.CreateUserRes.user:type_name -> user.User
-	4, // 5: user.CreateUserRes.token_pair:type_name -> user.TokenPair
-	0, // 6: user.UserService.GetUserByID:input_type -> user.GetUserForm
-	2, // 7: user.UserService.Login:input_type -> user.LoginReq
-	5, // 8: user.UserService.CreateUser:input_type -> user.CreateUserReq
-	1, // 9: user.UserService.GetUserByID:output_type -> user.User
-	3, // 10: user.UserService.Login:output_type -> user.LoginRes
-	6, // 11: user.UserService.CreateUser:output_type -> user.CreateUserRes
-	9, // [9:12] is the sub-list for method output_type
-	6, // [6:9] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	9,  // 0: user.User.createdAt:type_name -> google.protobuf.Timestamp
+	9,  // 1: user.User.updatedAt:type_name -> google.protobuf.Timestamp
+	1,  // 2: user.LoginRes.user:type_name -> user.User
+	4,  // 3: user.LoginRes.token_pair:type_name -> user.TokenPair
+	1,  // 4: user.CreateUserRes.user:type_name -> user.User
+	4,  // 5: user.CreateUserRes.token_pair:type_name -> user.TokenPair
+	1,  // 6: user.UpdateUserRes.beforeUser:type_name -> user.User
+	1,  // 7: user.UpdateUserRes.afterUser:type_name -> user.User
+	0,  // 8: user.UserService.GetUserByID:input_type -> user.GetUserForm
+	2,  // 9: user.UserService.Login:input_type -> user.LoginReq
+	5,  // 10: user.UserService.CreateUser:input_type -> user.CreateUserReq
+	7,  // 11: user.UserService.UpdateUser:input_type -> user.UpdateUserReq
+	1,  // 12: user.UserService.GetUserByID:output_type -> user.User
+	3,  // 13: user.UserService.Login:output_type -> user.LoginRes
+	6,  // 14: user.UserService.CreateUser:output_type -> user.CreateUserRes
+	8,  // 15: user.UserService.UpdateUser:output_type -> user.UpdateUserRes
+	12, // [12:16] is the sub-list for method output_type
+	8,  // [8:12] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_user_proto_init() }
@@ -640,6 +780,30 @@ func file_user_proto_init() {
 				return nil
 			}
 		}
+		file_user_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateUserReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_user_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateUserRes); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -647,7 +811,7 @@ func file_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_user_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -676,6 +840,7 @@ type UserServiceClient interface {
 	GetUserByID(ctx context.Context, in *GetUserForm, opts ...grpc.CallOption) (*User, error)
 	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginRes, error)
 	CreateUser(ctx context.Context, opts ...grpc.CallOption) (UserService_CreateUserClient, error)
+	UpdateUser(ctx context.Context, opts ...grpc.CallOption) (UserService_UpdateUserClient, error)
 }
 
 type userServiceClient struct {
@@ -738,11 +903,46 @@ func (x *userServiceCreateUserClient) CloseAndRecv() (*CreateUserRes, error) {
 	return m, nil
 }
 
+func (c *userServiceClient) UpdateUser(ctx context.Context, opts ...grpc.CallOption) (UserService_UpdateUserClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_UserService_serviceDesc.Streams[1], "/user.UserService/UpdateUser", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &userServiceUpdateUserClient{stream}
+	return x, nil
+}
+
+type UserService_UpdateUserClient interface {
+	Send(*UpdateUserReq) error
+	CloseAndRecv() (*UpdateUserRes, error)
+	grpc.ClientStream
+}
+
+type userServiceUpdateUserClient struct {
+	grpc.ClientStream
+}
+
+func (x *userServiceUpdateUserClient) Send(m *UpdateUserReq) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *userServiceUpdateUserClient) CloseAndRecv() (*UpdateUserRes, error) {
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	m := new(UpdateUserRes)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 type UserServiceServer interface {
 	GetUserByID(context.Context, *GetUserForm) (*User, error)
 	Login(context.Context, *LoginReq) (*LoginRes, error)
 	CreateUser(UserService_CreateUserServer) error
+	UpdateUser(UserService_UpdateUserServer) error
 }
 
 // UnimplementedUserServiceServer can be embedded to have forward compatible implementations.
@@ -757,6 +957,9 @@ func (*UnimplementedUserServiceServer) Login(context.Context, *LoginReq) (*Login
 }
 func (*UnimplementedUserServiceServer) CreateUser(UserService_CreateUserServer) error {
 	return status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
+}
+func (*UnimplementedUserServiceServer) UpdateUser(UserService_UpdateUserServer) error {
+	return status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
 }
 
 func RegisterUserServiceServer(s *grpc.Server, srv UserServiceServer) {
@@ -825,6 +1028,32 @@ func (x *userServiceCreateUserServer) Recv() (*CreateUserReq, error) {
 	return m, nil
 }
 
+func _UserService_UpdateUser_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(UserServiceServer).UpdateUser(&userServiceUpdateUserServer{stream})
+}
+
+type UserService_UpdateUserServer interface {
+	SendAndClose(*UpdateUserRes) error
+	Recv() (*UpdateUserReq, error)
+	grpc.ServerStream
+}
+
+type userServiceUpdateUserServer struct {
+	grpc.ServerStream
+}
+
+func (x *userServiceUpdateUserServer) SendAndClose(m *UpdateUserRes) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *userServiceUpdateUserServer) Recv() (*UpdateUserReq, error) {
+	m := new(UpdateUserReq)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 var _UserService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "user.UserService",
 	HandlerType: (*UserServiceServer)(nil),
@@ -842,6 +1071,11 @@ var _UserService_serviceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "CreateUser",
 			Handler:       _UserService_CreateUser_Handler,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "UpdateUser",
+			Handler:       _UserService_UpdateUser_Handler,
 			ClientStreams: true,
 		},
 	},

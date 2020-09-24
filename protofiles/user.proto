@@ -7,6 +7,7 @@ service UserService {
   rpc GetUserByID (GetUserForm) returns (User) {}
   rpc Login(LoginReq) returns (LoginRes);
   rpc CreateUser(stream CreateUserReq) returns (CreateUserRes);
+  rpc UpdateUser(stream UpdateUserReq) returns (UpdateUserRes);
 }
 
 message GetUserForm {
@@ -42,7 +43,19 @@ message CreateUserReq {
   string email = 2;
   string password = 3;
 }
+
 message CreateUserRes {
   User user = 1;
   TokenPair token_pair = 2;
+}
+
+message UpdateUserReq {
+  string email = 1;
+  string name = 2;
+  string password = 3;
+}
+
+message UpdateUserRes {
+  User beforeUser = 1;
+  User afterUser = 2;
 }
