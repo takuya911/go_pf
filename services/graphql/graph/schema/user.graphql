@@ -17,6 +17,8 @@ extend type User {
   name: String!
   email: String!
   password: String!
+  telephoneNumber:String!
+  gender: Int!
   createdAt: Time!
   updatedAt: Time!
 }
@@ -40,6 +42,9 @@ input CreateUserInput {
   name: String!
   email: String!
   password: String!
+  telephoneNumber:String!
+  gender: Int!
+
 }
 
 type CreateUserPayload {
@@ -51,6 +56,8 @@ input UpdateUserInput {
   email: String!
   name: String!
   password: String!
+  telephoneNumber:String!
+  gender: Int!
 }
 type UpdateUserPayload {
   beforeUser: User!

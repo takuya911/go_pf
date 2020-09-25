@@ -19,8 +19,10 @@ message User {
   string name = 2;
   string email = 3;
   string password = 4;
-  google.protobuf.Timestamp createdAt = 5;
-  google.protobuf.Timestamp updatedAt = 6;
+  string telephone_number = 5;
+  int64 gender = 6;
+  google.protobuf.Timestamp createdAt = 7;
+  google.protobuf.Timestamp updatedAt = 8;
 }
 
 message LoginReq {
@@ -42,6 +44,8 @@ message CreateUserReq {
   string name = 1;
   string email = 2;
   string password = 3;
+  string telephone_number = 4;
+  int64 gender = 5;
 }
 
 message CreateUserRes {
@@ -54,9 +58,11 @@ message UpdateUserReq {
   string email = 2;
   string name = 3;
   string password = 4;
+  string telephone_number = 5;
+  int64 gender = 6;
 }
 
 message UpdateUserRes {
-  User beforeUser = 1;
-  User afterUser = 2;
+  User before_user = 1;
+  User after_user = 2;
 }

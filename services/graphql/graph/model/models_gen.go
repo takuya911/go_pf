@@ -7,9 +7,11 @@ import (
 )
 
 type CreateUserInput struct {
-	Name     string `json:"name"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
+	Name            string `json:"name"`
+	Email           string `json:"email"`
+	Password        string `json:"password"`
+	TelephoneNumber string `json:"telephoneNumber"`
+	Gender          int64  `json:"gender"`
 }
 
 type CreateUserPayload struct {
@@ -28,10 +30,12 @@ type LoginPayload struct {
 }
 
 type UpdateUserInput struct {
-	ID       int64  `json:"id"`
-	Email    string `json:"email"`
-	Name     string `json:"name"`
-	Password string `json:"password"`
+	ID              int64  `json:"id"`
+	Email           string `json:"email"`
+	Name            string `json:"name"`
+	Password        string `json:"password"`
+	TelephoneNumber string `json:"telephoneNumber"`
+	Gender          int64  `json:"gender"`
 }
 
 type UpdateUserPayload struct {

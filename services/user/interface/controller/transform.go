@@ -18,12 +18,14 @@ func convUserProto(u *domain.User) (*pb.User, error) {
 	}
 
 	return &pb.User{
-		Id:        u.ID,
-		Name:      u.Name,
-		Email:     u.Email,
-		Password:  u.Password,
-		CreatedAt: createdAt,
-		UpdatedAt: updatedAt,
+		Id:              u.ID,
+		Name:            u.Name,
+		Email:           u.Email,
+		Password:        u.Password,
+		TelephoneNumber: u.TelephoneNumber,
+		Gender:          u.Gender,
+		CreatedAt:       createdAt,
+		UpdatedAt:       updatedAt,
 	}, nil
 }
 

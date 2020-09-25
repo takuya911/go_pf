@@ -52,9 +52,11 @@ func (c *userController) CreateUser(stream pb.UserService_CreateUserServer) erro
 		return err
 	}
 	user := &domain.User{
-		Name:     req.Name,
-		Email:    req.Email,
-		Password: req.Password,
+		Name:            req.Name,
+		Email:           req.Email,
+		Password:        req.Password,
+		TelephoneNumber: req.TelephoneNumber,
+		Gender:          req.Gender,
 	}
 
 	token, err := c.userInteractor.CreateUser(ctx, user)
