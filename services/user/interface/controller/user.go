@@ -85,10 +85,12 @@ func (c *userController) UpdateUser(stream pb.UserService_UpdateUserServer) erro
 	}
 
 	formUser := &domain.User{
-		ID:       req.Id,
-		Name:     req.Name,
-		Email:    req.Email,
-		Password: req.Password,
+		ID:              req.Id,
+		Name:            req.Name,
+		Email:           req.Email,
+		Password:        req.Password,
+		TelephoneNumber: req.TelephoneNumber,
+		Gender:          req.Gender,
 	}
 
 	// update

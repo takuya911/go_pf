@@ -53,10 +53,12 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUse
 
 func (r *mutationResolver) UpdateUser(ctx context.Context, input model.UpdateUserInput) (*model.UpdateUserPayload, error) {
 	req := &user.UpdateUserReq{
-		Id:       input.ID,
-		Name:     input.Name,
-		Email:    input.Email,
-		Password: input.Password,
+		Id:              input.ID,
+		Name:            input.Name,
+		Email:           input.Email,
+		Password:        input.Password,
+		TelephoneNumber: input.TelephoneNumber,
+		Gender:          input.Gender,
 	}
 	stream, err := r.userClient.UpdateUser(ctx)
 	if err != nil {
