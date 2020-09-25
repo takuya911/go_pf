@@ -39,16 +39,11 @@ func (r *userRepository) CreateUser(ctx context.Context, user *domain.User) erro
 	return nil
 }
 
-func (r *userRepository) UpdateUser(ctx context.Context, formUser *domain.User) (*domain.User, *domain.User, error) {
-	var aUser domain.User
+func (r *userRepository) UpdateUser(ctx context.Context, formUser *domain.User) (*domain.User, error) {
 	var bUser domain.User
 
 	// transaction
 	err := r.Conn.Transaction(func(tx *gorm.DB) error {
-		// update after
-		if rs := tx.First(&aUser, formUser.ID); rs.Error != nil {
-			return rs.Error
-		}
 		// update
 		if rs := tx.Save(&formUser); rs.Error != nil {
 			return rs.Error
@@ -61,8 +56,8 @@ func (r *userRepository) UpdateUser(ctx context.Context, formUser *domain.User) 
 	})
 
 	if err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
-	return &aUser, &bUser, nil
+	return &bUser, nil
 }

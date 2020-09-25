@@ -4,7 +4,5 @@ import "errors"
 
 var (
 	PasswordFaultError = errors.New("password is incorrect")
-	UserAlreadyExists  = errors.New("user is already exist, please register by other email")
-	UserDoesNotExists  = errors.New("user does not exists")
-	EmailAlreadyUsed   = errors.New("email is already used")
+	EmailAlreadyUsed   = errors.New("This email is already used, please register by other email")
 )

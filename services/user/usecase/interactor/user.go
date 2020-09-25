@@ -51,45 +51,42 @@ func (i *userInteractor) Login(ctx context.Context, email string, password strin
 	return user, tokenPair, nil
 }
 
-func (i *userInteractor) CreateUser(ctx context.Context, user *domain.User) (*domain.TokenPair, error) {
+func (i *userInteractor) CreateUser(ctx context.Context, formUser *domain.User) (*domain.TokenPair, error) {
 
-	emailUsedUser, err := i.userRepository.GetUserByEmail(ctx, user.Email)
-	if err != nil {
-		// recodeない場合もエラーになって帰ってくるので、とりあえず無視
-	}
-	if emailUsedUser != nil && user.ID != emailUsedUser.ID {
-		// email利用しているユーザーがいて、IDが別である場合はerr
-		return nil, errors.UserAlreadyExists
+	// recodeない場合もエラーになって帰ってくるので、とりあえず無視
+	emailUsedUser, err := i.userRepository.GetUserByEmail(ctx, formUser.Email)
+	if emailUsedUser != nil {
+		// すでに該当するemailを利用しているユーザーがいる場合、error返す
+		return nil, errors.EmailAlreadyUsed
 	}
 
-	encryptedPass, err := genEncryptedPass(user.Password)
+	encryptedPass, err := genEncryptedPass(formUser.Password)
 	if err != nil {
 		return nil, err
 	}
-	user.Password = encryptedPass
+	formUser.Password = encryptedPass
 
-	if err := i.userRepository.CreateUser(ctx, user); err != nil {
+	if err := i.userRepository.CreateUser(ctx, formUser); err != nil {
 		return nil, err
 	}
 
-	return genTokenPair(strconv.FormatInt(user.ID, 10))
+	return genTokenPair(strconv.FormatInt(formUser.ID, 10))
 
 }
 
 func (i *userInteractor) UpdateUser(ctx context.Context, formUser *domain.User) (*domain.User, *domain.User, error) {
-
-	// IDからユーザー情報取得
-	existUser, err := i.userRepository.GetUserByID(ctx, formUser.ID)
+	// 更新前ユーザー取得
+	bUser, err := i.userRepository.GetUserByID(ctx, formUser.ID)
 	if err != nil {
 		return nil, nil, err
 	}
-	// emailを変更する場合は、変更後のEmailを他の人が使っていないか確認
-	if formUser.Email != existUser.Email {
-		user, err := i.userRepository.GetUserByEmail(ctx, formUser.Email)
-		if err != nil {
-			if formUser.ID != user.ID {
-				return nil, nil, errors.UserAlreadyExists
-			}
+
+	// emailに更新がある場合、更新後のemailアドレスを使っているユーザーがいないか確認
+	if bUser.Email != formUser.Email {
+		emailUsedUser, _ := i.userRepository.GetUserByEmail(ctx, formUser.Email)
+		if emailUsedUser != nil && formUser.ID != emailUsedUser.ID {
+			// すでに該当するemailを利用しているユーザーがいて、IDが別である場合error返す
+			return nil, nil, errors.EmailAlreadyUsed
 		}
 	}
 
@@ -101,7 +98,7 @@ func (i *userInteractor) UpdateUser(ctx context.Context, formUser *domain.User) 
 	formUser.Password = encryptedPass
 
 	// update
-	bUser, aUser, err := i.userRepository.UpdateUser(ctx, formUser)
+	aUser, err := i.userRepository.UpdateUser(ctx, formUser)
 	if err != nil {
 		return nil, nil, err
 	}
