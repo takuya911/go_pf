@@ -51,39 +51,43 @@ func (i *userInteractor) Login(ctx context.Context, email string, password strin
 	return user, tokenPair, nil
 }
 
-func (i *userInteractor) CreateUser(ctx context.Context, user *domain.User) (*domain.TokenPair, error) {
+func (i *userInteractor) CreateUser(ctx context.Context, formUser *domain.User) (*domain.TokenPair, error) {
 
-	// Make sure user doesn't exist
-	alreadyExist, err := i.userRepository.UserAlreadyExist(ctx, user.Email)
+	// recodeない場合もエラーになって帰ってくるので、とりあえず無視
+	emailUsedUser, err := i.userRepository.GetUserByEmail(ctx, formUser.Email)
+	if emailUsedUser != nil {
+		// すでに該当するemailを利用しているユーザーがいる場合、error返す
+		return nil, errors.EmailAlreadyUsed
+	}
+
+	encryptedPass, err := genEncryptedPass(formUser.Password)
 	if err != nil {
 		return nil, err
 	}
-	if alreadyExist {
-		return nil, errors.UserAlreadyExists
-	}
+	formUser.Password = encryptedPass
 
-	encryptedPass, err := genEncryptedPass(user.Password)
-	if err != nil {
-		return nil, err
-	}
-	user.Password = encryptedPass
-
-	if err := i.userRepository.CreateUser(ctx, user); err != nil {
+	if err := i.userRepository.CreateUser(ctx, formUser); err != nil {
 		return nil, err
 	}
 
-	return genTokenPair(strconv.FormatInt(user.ID, 10))
+	return genTokenPair(strconv.FormatInt(formUser.ID, 10))
 
 }
 
 func (i *userInteractor) UpdateUser(ctx context.Context, formUser *domain.User) (*domain.User, *domain.User, error) {
-	// 存在しないユーザーの場合はerrorを返す
-	alreadyExist, err := i.userRepository.UserAlreadyExist(ctx, formUser.Email)
+	// 更新前ユーザー取得
+	bUser, err := i.userRepository.GetUserByID(ctx, formUser.ID)
 	if err != nil {
 		return nil, nil, err
 	}
-	if !alreadyExist {
-		return nil, nil, errors.UserDoesNotExists
+
+	// emailに更新がある場合、更新後のemailアドレスを使っているユーザーがいないか確認
+	if bUser.Email != formUser.Email {
+		emailUsedUser, _ := i.userRepository.GetUserByEmail(ctx, formUser.Email)
+		if emailUsedUser != nil && formUser.ID != emailUsedUser.ID {
+			// すでに該当するemailを利用しているユーザーがいて、IDが別である場合error返す
+			return nil, nil, errors.EmailAlreadyUsed
+		}
 	}
 
 	// password 暗号化
@@ -94,7 +98,7 @@ func (i *userInteractor) UpdateUser(ctx context.Context, formUser *domain.User) 
 	formUser.Password = encryptedPass
 
 	// update
-	bUser, aUser, err := i.userRepository.UpdateUser(ctx, formUser)
+	aUser, err := i.userRepository.UpdateUser(ctx, formUser)
 	if err != nil {
 		return nil, nil, err
 	}

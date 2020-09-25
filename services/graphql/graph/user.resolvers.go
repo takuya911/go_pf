@@ -25,9 +25,11 @@ func (r *mutationResolver) Login(ctx context.Context, input model.LoginInput) (*
 
 func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUserInput) (*model.CreateUserPayload, error) {
 	req := &user.CreateUserReq{
-		Name:     input.Name,
-		Email:    input.Email,
-		Password: input.Password,
+		Name:            input.Name,
+		Email:           input.Email,
+		Password:        input.Password,
+		TelephoneNumber: input.TelephoneNumber,
+		Gender:          input.Gender,
 	}
 	stream, err := r.userClient.CreateUser(ctx)
 	if err != nil {
