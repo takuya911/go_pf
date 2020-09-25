@@ -85,10 +85,12 @@ func (c *userController) UpdateUser(stream pb.UserService_UpdateUserServer) erro
 	}
 
 	formUser := &domain.User{
-		ID:       req.Id,
-		Name:     req.Name,
-		Email:    req.Email,
-		Password: req.Password,
+		ID:              req.Id,
+		Name:            req.Name,
+		Email:           req.Email,
+		Password:        req.Password,
+		TelephoneNumber: req.TelephoneNumber,
+		Gender:          req.Gender,
 	}
 
 	// update
@@ -110,5 +112,32 @@ func (c *userController) UpdateUser(stream pb.UserService_UpdateUserServer) erro
 	return stream.SendAndClose(&pb.UpdateUserRes{
 		BeforeUser: bUserProto,
 		AfterUser:  aUserProto,
+	})
+}
+
+func (c *userController) DeleteUser(stream pb.UserService_DeleteUserServer) error {
+	// token使って認証したい(フロント作ったら)
+	ctx := stream.Context()
+
+	req, err := stream.Recv()
+	if err != nil {
+		return err
+	}
+
+	formUser := &domain.User{
+		ID:       req.Id,
+		Email:    req.Email,
+		Password: req.Password,
+	}
+
+	// update
+	result, err := c.userInteractor.DeleteUser(ctx, formUser)
+	if err != nil {
+		return err
+	}
+
+	// 変換
+	return stream.SendAndClose(&pb.DeleteUserRes{
+		Result: result,
 	})
 }

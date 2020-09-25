@@ -6,6 +6,7 @@ extend type Mutation {
   login(input: LoginInput!): LoginPayload!
   createUser(input: CreateUserInput!): CreateUserPayload!
   updateUser(input: UpdateUserInput!): UpdateUserPayload!
+  deleteUser(input: DeleteUserPayInput!): DeleteUserPayload!
 }
 
 input getUserForm{
@@ -42,7 +43,7 @@ input CreateUserInput {
   name: String!
   email: String!
   password: String!
-  telephoneNumber:String!
+  telephoneNumber: String!
   gender: Int!
 
 }
@@ -52,7 +53,7 @@ type CreateUserPayload {
   tokenPair: TokenPair!
 }
 input UpdateUserInput {
-  id:ID!
+  id: ID!
   email: String!
   name: String!
   password: String!
@@ -62,4 +63,14 @@ input UpdateUserInput {
 type UpdateUserPayload {
   beforeUser: User!
   afterUser: User!
+}
+
+input DeleteUserPayInput {
+  id: ID!
+  email: String!
+  password: String!
+}
+
+type DeleteUserPayload {
+  result: Boolean!
 }

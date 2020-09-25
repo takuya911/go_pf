@@ -12,4 +12,5 @@ type UserUsecase interface {
 	Login(ctx context.Context, email string, password string) (*domain.User, *domain.TokenPair, error)
 	CreateUser(ctx context.Context, user *domain.User) (*domain.TokenPair, error)
 	UpdateUser(ctx context.Context, user *domain.User) (*domain.User, *domain.User, error)
+	DeleteUser(ctx context.Context, user *domain.User) (bool, error)
 }

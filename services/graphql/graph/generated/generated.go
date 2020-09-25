@@ -50,6 +50,10 @@ type ComplexityRoot struct {
 		User      func(childComplexity int) int
 	}
 
+	DeleteUserPayload struct {
+		Result func(childComplexity int) int
+	}
+
 	LoginPayload struct {
 		TokenPair func(childComplexity int) int
 		User      func(childComplexity int) int
@@ -57,6 +61,7 @@ type ComplexityRoot struct {
 
 	Mutation struct {
 		CreateUser func(childComplexity int, input model.CreateUserInput) int
+		DeleteUser func(childComplexity int, input model.DeleteUserPayInput) int
 		Login      func(childComplexity int, input model.LoginInput) int
 		UpdateUser func(childComplexity int, input model.UpdateUserInput) int
 	}
@@ -91,6 +96,7 @@ type MutationResolver interface {
 	Login(ctx context.Context, input model.LoginInput) (*model.LoginPayload, error)
 	CreateUser(ctx context.Context, input model.CreateUserInput) (*model.CreateUserPayload, error)
 	UpdateUser(ctx context.Context, input model.UpdateUserInput) (*model.UpdateUserPayload, error)
+	DeleteUser(ctx context.Context, input model.DeleteUserPayInput) (*model.DeleteUserPayload, error)
 }
 type QueryResolver interface {
 	GetUserByID(ctx context.Context, input model.GetUserForm) (*user.User, error)
@@ -125,6 +131,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.CreateUserPayload.User(childComplexity), true
 
+	case "DeleteUserPayload.result":
+		if e.complexity.DeleteUserPayload.Result == nil {
+			break
+		}
+
+		return e.complexity.DeleteUserPayload.Result(childComplexity), true
+
 	case "LoginPayload.tokenPair":
 		if e.complexity.LoginPayload.TokenPair == nil {
 			break
@@ -150,6 +163,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.CreateUser(childComplexity, args["input"].(model.CreateUserInput)), true
+
+	case "Mutation.deleteUser":
+		if e.complexity.Mutation.DeleteUser == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deleteUser_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeleteUser(childComplexity, args["input"].(model.DeleteUserPayInput)), true
 
 	case "Mutation.login":
 		if e.complexity.Mutation.Login == nil {
@@ -343,6 +368,7 @@ extend type Mutation {
   login(input: LoginInput!): LoginPayload!
   createUser(input: CreateUserInput!): CreateUserPayload!
   updateUser(input: UpdateUserInput!): UpdateUserPayload!
+  deleteUser(input: DeleteUserPayInput!): DeleteUserPayload!
 }
 
 input getUserForm{
@@ -379,7 +405,7 @@ input CreateUserInput {
   name: String!
   email: String!
   password: String!
-  telephoneNumber:String!
+  telephoneNumber: String!
   gender: Int!
 
 }
@@ -389,7 +415,7 @@ type CreateUserPayload {
   tokenPair: TokenPair!
 }
 input UpdateUserInput {
-  id:ID!
+  id: ID!
   email: String!
   name: String!
   password: String!
@@ -399,6 +425,16 @@ input UpdateUserInput {
 type UpdateUserPayload {
   beforeUser: User!
   afterUser: User!
+}
+
+input DeleteUserPayInput {
+  id: ID!
+  email: String!
+  password: String!
+}
+
+type DeleteUserPayload {
+  result: Boolean!
 }`, BuiltIn: false},
 }
 var parsedSchema = gqlparser.MustLoadSchema(sources...)
@@ -414,6 +450,21 @@ func (ec *executionContext) field_Mutation_createUser_args(ctx context.Context, 
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithFieldInputContext(ctx, graphql.NewFieldInputWithField("input"))
 		arg0, err = ec.unmarshalNCreateUserInput2githubᚗcomᚋtakuya911ᚋgo_pfᚋservicesᚋgraphqlᚋgraphᚋmodelᚐCreateUserInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_deleteUser_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.DeleteUserPayInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithFieldInputContext(ctx, graphql.NewFieldInputWithField("input"))
+		arg0, err = ec.unmarshalNDeleteUserPayInput2githubᚗcomᚋtakuya911ᚋgo_pfᚋservicesᚋgraphqlᚋgraphᚋmodelᚐDeleteUserPayInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -586,6 +637,40 @@ func (ec *executionContext) _CreateUserPayload_tokenPair(ctx context.Context, fi
 	res := resTmp.(*user.TokenPair)
 	fc.Result = res
 	return ec.marshalNTokenPair2ᚖgithubᚗcomᚋtakuya911ᚋgo_pfᚋservicesᚋgraphqlᚋprotoᚐTokenPair(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _DeleteUserPayload_result(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUserPayload) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:   "DeleteUserPayload",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Result, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _LoginPayload_user(ctx context.Context, field graphql.CollectedField, obj *model.LoginPayload) (ret graphql.Marshaler) {
@@ -777,6 +862,47 @@ func (ec *executionContext) _Mutation_updateUser(ctx context.Context, field grap
 	res := resTmp.(*model.UpdateUserPayload)
 	fc.Result = res
 	return ec.marshalNUpdateUserPayload2ᚖgithubᚗcomᚋtakuya911ᚋgo_pfᚋservicesᚋgraphqlᚋgraphᚋmodelᚐUpdateUserPayload(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Mutation_deleteUser(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:   "Mutation",
+		Field:    field,
+		Args:     nil,
+		IsMethod: true,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	rawArgs := field.ArgumentMap(ec.Variables)
+	args, err := ec.field_Mutation_deleteUser_args(ctx, rawArgs)
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	fc.Args = args
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeleteUser(rctx, args["input"].(model.DeleteUserPayInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.DeleteUserPayload)
+	fc.Result = res
+	return ec.marshalNDeleteUserPayload2ᚖgithubᚗcomᚋtakuya911ᚋgo_pfᚋservicesᚋgraphqlᚋgraphᚋmodelᚐDeleteUserPayload(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_getUserById(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -2401,6 +2527,42 @@ func (ec *executionContext) unmarshalInputCreateUserInput(ctx context.Context, o
 	return it, nil
 }
 
+func (ec *executionContext) unmarshalInputDeleteUserPayInput(ctx context.Context, obj interface{}) (model.DeleteUserPayInput, error) {
+	var it model.DeleteUserPayInput
+	var asMap = obj.(map[string]interface{})
+
+	for k, v := range asMap {
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithFieldInputContext(ctx, graphql.NewFieldInputWithField("id"))
+			it.ID, err = ec.unmarshalNID2int64(ctx, v)
+			if err != nil {
+				return it, err
+			}
+		case "email":
+			var err error
+
+			ctx := graphql.WithFieldInputContext(ctx, graphql.NewFieldInputWithField("email"))
+			it.Email, err = ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+		case "password":
+			var err error
+
+			ctx := graphql.WithFieldInputContext(ctx, graphql.NewFieldInputWithField("password"))
+			it.Password, err = ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+		}
+	}
+
+	return it, nil
+}
+
 func (ec *executionContext) unmarshalInputLoginInput(ctx context.Context, obj interface{}) (model.LoginInput, error) {
 	var it model.LoginInput
 	var asMap = obj.(map[string]interface{})
@@ -2549,6 +2711,33 @@ func (ec *executionContext) _CreateUserPayload(ctx context.Context, sel ast.Sele
 	return out
 }
 
+var deleteUserPayloadImplementors = []string{"DeleteUserPayload"}
+
+func (ec *executionContext) _DeleteUserPayload(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteUserPayload) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteUserPayloadImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	var invalids uint32
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteUserPayload")
+		case "result":
+			out.Values[i] = ec._DeleteUserPayload_result(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch()
+	if invalids > 0 {
+		return graphql.Null
+	}
+	return out
+}
+
 var loginPayloadImplementors = []string{"LoginPayload"}
 
 func (ec *executionContext) _LoginPayload(ctx context.Context, sel ast.SelectionSet, obj *model.LoginPayload) graphql.Marshaler {
@@ -2608,6 +2797,11 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 			}
 		case "updateUser":
 			out.Values[i] = ec._Mutation_updateUser(ctx, field)
+			if out.Values[i] == graphql.Null {
+				invalids++
+			}
+		case "deleteUser":
+			out.Values[i] = ec._Mutation_deleteUser(ctx, field)
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
@@ -3066,6 +3260,25 @@ func (ec *executionContext) marshalNCreateUserPayload2ᚖgithubᚗcomᚋtakuya91
 		return graphql.Null
 	}
 	return ec._CreateUserPayload(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNDeleteUserPayInput2githubᚗcomᚋtakuya911ᚋgo_pfᚋservicesᚋgraphqlᚋgraphᚋmodelᚐDeleteUserPayInput(ctx context.Context, v interface{}) (model.DeleteUserPayInput, error) {
+	res, err := ec.unmarshalInputDeleteUserPayInput(ctx, v)
+	return res, graphql.WrapErrorWithInputPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNDeleteUserPayload2githubᚗcomᚋtakuya911ᚋgo_pfᚋservicesᚋgraphqlᚋgraphᚋmodelᚐDeleteUserPayload(ctx context.Context, sel ast.SelectionSet, v model.DeleteUserPayload) graphql.Marshaler {
+	return ec._DeleteUserPayload(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNDeleteUserPayload2ᚖgithubᚗcomᚋtakuya911ᚋgo_pfᚋservicesᚋgraphqlᚋgraphᚋmodelᚐDeleteUserPayload(ctx context.Context, sel ast.SelectionSet, v *model.DeleteUserPayload) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteUserPayload(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNID2int64(ctx context.Context, v interface{}) (int64, error) {

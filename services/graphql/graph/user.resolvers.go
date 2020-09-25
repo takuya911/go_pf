@@ -53,10 +53,12 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input model.CreateUse
 
 func (r *mutationResolver) UpdateUser(ctx context.Context, input model.UpdateUserInput) (*model.UpdateUserPayload, error) {
 	req := &user.UpdateUserReq{
-		Id:       input.ID,
-		Name:     input.Name,
-		Email:    input.Email,
-		Password: input.Password,
+		Id:              input.ID,
+		Name:            input.Name,
+		Email:           input.Email,
+		Password:        input.Password,
+		TelephoneNumber: input.TelephoneNumber,
+		Gender:          input.Gender,
 	}
 	stream, err := r.userClient.UpdateUser(ctx)
 	if err != nil {
@@ -75,6 +77,31 @@ func (r *mutationResolver) UpdateUser(ctx context.Context, input model.UpdateUse
 	return &model.UpdateUserPayload{
 		BeforeUser: res.BeforeUser,
 		AfterUser:  res.AfterUser,
+	}, nil
+}
+
+func (r *mutationResolver) DeleteUser(ctx context.Context, input model.DeleteUserPayInput) (*model.DeleteUserPayload, error) {
+	req := &user.DeleteUserReq{
+		Id:       input.ID,
+		Email:    input.Email,
+		Password: input.Password,
+	}
+	stream, err := r.userClient.DeleteUser(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := stream.Send(req); err != nil {
+		return nil, err
+	}
+
+	res, err := stream.CloseAndRecv()
+	if err != nil {
+		return nil, err
+	}
+
+	return &model.DeleteUserPayload{
+		Result: res.Result,
 	}, nil
 }
 
