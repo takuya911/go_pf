@@ -103,6 +103,7 @@ func (i *userInteractor) UpdateUser(ctx context.Context, formUser *domain.User) 
 	if err != nil {
 		return nil, nil, err
 	}
+
 	return bUser, aUser, nil
 }
 
