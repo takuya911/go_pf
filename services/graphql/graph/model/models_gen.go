@@ -19,6 +19,16 @@ type CreateUserPayload struct {
 	TokenPair *user.TokenPair `json:"tokenPair"`
 }
 
+type DeleteUserPayInput struct {
+	ID       int64  `json:"id"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type DeleteUserPayload struct {
+	Result bool `json:"result"`
+}
+
 type LoginInput struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`

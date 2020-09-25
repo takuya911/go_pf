@@ -2,12 +2,14 @@ syntax = "proto3";
 
 package user;
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
 
 service UserService {
   rpc GetUserByID (GetUserForm) returns (User) {}
   rpc Login(LoginReq) returns (LoginRes);
   rpc CreateUser(stream CreateUserReq) returns (CreateUserRes);
   rpc UpdateUser(stream UpdateUserReq) returns (UpdateUserRes);
+  rpc DeleteUser(stream DeleteUserReq) returns (google.protobuf.Empty);
 }
 
 message GetUserForm {
@@ -65,4 +67,10 @@ message UpdateUserReq {
 message UpdateUserRes {
   User before_user = 1;
   User after_user = 2;
+}
+
+message DeleteUserReq {
+  int64 id = 1;
+  string email = 2;
+  string password = 3;
 }
