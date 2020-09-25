@@ -61,3 +61,8 @@ func (r *userRepository) UpdateUser(ctx context.Context, formUser *domain.User) 
 
 	return &bUser, nil
 }
+
+func (r *userRepository) DeleteUser(ctx context.Context, ID int64) (bool, error) {
+	// 削除処理
+	return true, nil
+}

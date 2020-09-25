@@ -23,6 +23,7 @@ type UserUsecase interface {
 	GetUserByID(ctx context.Context, userID int64) (*domain.User, error)
 	CreateUser(ctx context.Context, user *domain.User) (*domain.TokenPair, error)
 	UpdateUser(ctx context.Context, user *domain.User) error
+	DeleteUser(ctx context.Context, user *domain.User) error
 }
 
 func (i *userInteractor) GetUserByID(ctx context.Context, userID int64) (*domain.User, error) {
@@ -103,4 +104,24 @@ func (i *userInteractor) UpdateUser(ctx context.Context, formUser *domain.User) 
 		return nil, nil, err
 	}
 	return bUser, aUser, nil
+}
+
+func (i *userInteractor) DeleteUser(ctx context.Context, formUser *domain.User) (bool, error) {
+	// 更新前ユーザー取得
+	bUser, err := i.userRepository.GetUserByID(ctx, formUser.ID)
+	if err != nil {
+		return false, err
+	}
+
+	if err := compareHashAndPass(bUser.Password, formUser.Password); err != nil {
+		return false, err
+	}
+
+	// 削除
+	result, err := i.userRepository.DeleteUser(ctx, formUser.ID)
+	if err != nil {
+		return false, err
+	}
+
+	return result, nil
 }
