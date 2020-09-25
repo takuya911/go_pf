@@ -54,7 +54,6 @@ func (r *userRepository) UpdateUser(ctx context.Context, formUser *domain.User) 
 		}
 		return nil
 	})
-
 	if err != nil {
 		return nil, err
 	}
@@ -63,6 +62,9 @@ func (r *userRepository) UpdateUser(ctx context.Context, formUser *domain.User) 
 }
 
 func (r *userRepository) DeleteUser(ctx context.Context, ID int64) (bool, error) {
-	// 削除処理
+	deleteUserSQL := "UPDATE users SET deleted_at = now() WHERE id = ?"
+	if rs := r.Conn.Exec(deleteUserSQL, ID); rs.Error != nil {
+		return false, rs.Error
+	}
 	return true, nil
 }
