@@ -6,5 +6,6 @@ CREATE TABLE `users` (
   `telephone_number` varchar(255) NOT NULL,
   `gender` int NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` datetime DEFAULT NULL
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL
 );

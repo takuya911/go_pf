@@ -77,14 +77,22 @@ func (i *userInteractor) CreateUser(ctx context.Context, user *domain.User) (*do
 }
 
 func (i *userInteractor) UpdateUser(ctx context.Context, formUser *domain.User) (*domain.User, *domain.User, error) {
-	// 存在しないユーザーの場合はerrorを返す
-	alreadyExist, err := i.userRepository.UserAlreadyExist(ctx, formUser.Email)
-	if err != nil {
-		return nil, nil, err
-	}
-	if !alreadyExist {
-		return nil, nil, errors.UserDoesNotExists
-	}
+
+	// // IDからユーザー情報取得
+	// user, err := i.userRepository.GetUserByID(ctx, formUser.ID)
+	// if err != nil {
+	// 	return nil, nil, err
+	// }
+
+	// // emailを変更する場合は、変更後のEmailを他の人が使っていないか確認
+	// if formUser.Email != user.Email {
+	// 	user, err := i.userRepository.GetUserByEmail(ctx, formUser.Email)
+	// 	if err != nil {
+	// 		if formUser.ID != user.ID {
+	// 			return nil, nil, errors.UserAlreadyExists
+	// 		}
+	// 	}
+	// }
 
 	// password 暗号化
 	encryptedPass, err := genEncryptedPass(formUser.Password)
