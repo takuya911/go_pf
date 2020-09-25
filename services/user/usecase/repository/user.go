@@ -12,5 +12,4 @@ type UserRepository interface {
 	GetUserByEmail(ctx context.Context, email string) (*domain.User, error)
 	CreateUser(ctx context.Context, user *domain.User) error
 	UpdateUser(ctx context.Context, user *domain.User) (*domain.User, *domain.User, error)
-	UserAlreadyExist(tx context.Context, email string) (bool, error)
 }

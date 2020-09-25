@@ -53,12 +53,12 @@ func (i *userInteractor) Login(ctx context.Context, email string, password strin
 
 func (i *userInteractor) CreateUser(ctx context.Context, user *domain.User) (*domain.TokenPair, error) {
 
-	// Make sure user doesn't exist
-	alreadyExist, err := i.userRepository.UserAlreadyExist(ctx, user.Email)
+	emailUsedUser, err := i.userRepository.GetUserByEmail(ctx, user.Email)
 	if err != nil {
-		return nil, err
+		// recodeない場合もエラーになって帰ってくるので、とりあえず無視
 	}
-	if alreadyExist {
+	if emailUsedUser != nil && user.ID != emailUsedUser.ID {
+		// email利用しているユーザーがいて、IDが別である場合はerr
 		return nil, errors.UserAlreadyExists
 	}
 
@@ -78,21 +78,20 @@ func (i *userInteractor) CreateUser(ctx context.Context, user *domain.User) (*do
 
 func (i *userInteractor) UpdateUser(ctx context.Context, formUser *domain.User) (*domain.User, *domain.User, error) {
 
-	// // IDからユーザー情報取得
-	// user, err := i.userRepository.GetUserByID(ctx, formUser.ID)
-	// if err != nil {
-	// 	return nil, nil, err
-	// }
-
-	// // emailを変更する場合は、変更後のEmailを他の人が使っていないか確認
-	// if formUser.Email != user.Email {
-	// 	user, err := i.userRepository.GetUserByEmail(ctx, formUser.Email)
-	// 	if err != nil {
-	// 		if formUser.ID != user.ID {
-	// 			return nil, nil, errors.UserAlreadyExists
-	// 		}
-	// 	}
-	// }
+	// IDからユーザー情報取得
+	existUser, err := i.userRepository.GetUserByID(ctx, formUser.ID)
+	if err != nil {
+		return nil, nil, err
+	}
+	// emailを変更する場合は、変更後のEmailを他の人が使っていないか確認
+	if formUser.Email != existUser.Email {
+		user, err := i.userRepository.GetUserByEmail(ctx, formUser.Email)
+		if err != nil {
+			if formUser.ID != user.ID {
+				return nil, nil, errors.UserAlreadyExists
+			}
+		}
+	}
 
 	// password 暗号化
 	encryptedPass, err := genEncryptedPass(formUser.Password)
