@@ -17,7 +17,7 @@ func convUserProto(u *domain.User) (*pb.User, error) {
 		return nil, err
 	}
 
-	// deleted_atも返そうと思えば返せる
+	// deleted_atも返そうと思えば返せる?
 	// var deletedAt *timestamppb.Timestamp
 	// if u.DeletedAt != nil {
 	// 	deletedAt, err = ptypes.TimestampProto(*u.DeletedAt)
