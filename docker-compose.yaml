@@ -15,7 +15,7 @@ services:
   user:
     build:
       context: ./services/user
-      dockerfile: build/Dockerfile.dev
+      dockerfile: build/Dockerfile
     volumes:
       - ./services/user:/app
     environment:
