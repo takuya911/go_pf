@@ -1,7 +1,7 @@
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/elegant-door-290701/github.com/takuya911/go_pf:$COMMIT_SHA','-f','./build/Dockerfile','./services/graphql']
+    args: ['build', '-t', 'gcr.io/elegant-door-290701/github.com/takuya911/go_pf:$COMMIT_SHA','-f','./services/graphql/build/Dockerfile','./services/graphql']
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/elegant-door-290701/github.com/takuya911/go_pf:$COMMIT_SHA']
