@@ -23,7 +23,6 @@ services:
       - DB_NAME=mysql_db
       - DB_USER=root
       - DB_PASS=password
-      - DB_COLLATION=utf8mb4_unicode_ci
       - USER_SERVICE_PORT=50051
     ports:
       - "50051:50051"
