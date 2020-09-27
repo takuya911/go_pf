@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 
+	_ "github.com/go-sql-driver/mysql"
+
 	"github.com/jinzhu/gorm"
 )
 
@@ -31,24 +33,22 @@ func NewGormConnect() (*gorm.DB, error) {
 
 	// return db, nil
 	var (
-		dbUser                 = os.Getenv("DB_USER")                  // e.g. 'my-db-user'
-		dbPwd                  = os.Getenv("DB_PASS")                  // e.g. 'my-db-password'
-		instanceConnectionName = os.Getenv("INSTANCE_CONNECTION_NAME") // e.g. 'project:region:instance'
-		dbName                 = os.Getenv("DB_NAME")                  // e.g. 'my-database'
+		dbUser                 = os.Getenv("DB_USER")
+		dbPwd                  = os.Getenv("DB_PASS")
+		instanceConnectionName = os.Getenv("INSTANCE_CONNECTION_NAME")
+		dbName                 = os.Getenv("DB_NAME")
 	)
 
 	socketDir, isSet := os.LookupEnv("DB_SOCKET_DIR")
 	if !isSet {
 		socketDir = "/cloudsql"
 	}
-
-	var dbURI string
-	dbURI = fmt.Sprintf("%s:%s@unix(/%s/%s)/%s?parseTime=true", dbUser, dbPwd, socketDir, instanceConnectionName, dbName)
-
-	// dbPool is the pool of database connections.
-	dbPool, err := gorm.Open("mysql", dbURI)
+	dbURI := fmt.Sprintf("%s:%s@unix(/%s/%s)/%s?parseTime=true", dbUser, dbPwd, socketDir, instanceConnectionName, dbName)
+	db, err := gorm.Open("mysql", dbURI)
 	if err != nil {
 		return nil, fmt.Errorf("sql.Open: %v", err)
 	}
-	return dbPool, nil
+
+	return db, nil
+
 }
