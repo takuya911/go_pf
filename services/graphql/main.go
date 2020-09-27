@@ -4,7 +4,6 @@ import (
 	"context"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
@@ -17,13 +16,13 @@ import (
 
 func main() {
 	// get env
-	graphqlPort := os.Getenv("GRAPHQL_PORT")
-	userServicePort := os.Getenv("USER_SERVICE_PORT")
+	// graphqlPort := os.Getenv("GRAPHQL_PORT")
+	// userServicePort := os.Getenv("USER_SERVICE_PORT")
 
 	ctx := context.Background()
 
 	// User gRPC connect
-	conn, err := grpc.DialContext(ctx, "user:"+userServicePort, grpc.WithInsecure())
+	conn, err := grpc.DialContext(ctx, "user:50051" /*+userServicePort*/, grpc.WithInsecure())
 	if err != nil {
 		panic(err)
 	}
@@ -36,6 +35,6 @@ func main() {
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	http.Handle("/query", srv)
 
-	log.Printf("connect to http://localhost:%s/ for GraphQL playground", graphqlPort)
-	log.Fatal(http.ListenAndServe(":"+graphqlPort, nil))
+	log.Printf("connect to http://localhost:%s/ for GraphQL playground", 80 /*graphqlPort*/)
+	log.Fatal(http.ListenAndServe(":80" /*+graphqlPort*/, nil))
 }
