@@ -5,5 +5,8 @@ steps:
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/go-pf-290702/github.com/takuya911/go_pf/graphql:$COMMIT_SHA']
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: ['run', 'deploy', 'graphql', '--image', 'gcr.io/go-pf-290702/github.com/takuya911/go_pf/graphql:$COMMIT_SHA', '--region', 'asia-northeast1', '--platform', 'managed']
 images:
   - gcr.io/go-pf-290702/github.com/takuya911/go_pf/graphql:$COMMIT_SHA
