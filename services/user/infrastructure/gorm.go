@@ -14,10 +14,10 @@ func NewGormConnect() (*gorm.DB, error) {
 		User:                 os.Getenv("DB_USER"),
 		Passwd:               os.Getenv("DB_PASS"),
 		Net:                  "tcp",
-		Addr:                 os.Getenv("DB_HOST") + ":" + os.Getenv("DB_PORT"),
+		Addr:                 os.Getenv("INSTANCE_CONNECTION_NAME"),
 		DBName:               os.Getenv("DB_NAME"),
 		ParseTime:            true,
-		Collation:            os.Getenv("DB_COLLATION"),
+		Collation:            "utf8mb4_unicode_ci",
 		Loc:                  time.Local,
 		AllowNativePasswords: true,
 	}

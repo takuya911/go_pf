@@ -19,8 +19,7 @@ services:
     volumes:
       - ./services/user:/app
     environment:
-      - DB_HOST=db
-      - DB_PORT=3306
+      - INSTANCE_CONNECTION_NAME=db:3306
       - DB_NAME=mysql_db
       - DB_USER=root
       - DB_PASS=password
