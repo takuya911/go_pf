@@ -15,8 +15,8 @@ func NewGormConnect() (*gorm.DB, error) {
 	pass := os.Getenv("DB_PASS")
 	dbName := os.Getenv("DB_NAME")
 
-	instance := "go-pf-290702:asia-northeast1:go-pf-mysql"
-	connect := user + ":" + pass + "@unix(/cloudsql/" + instance + ")/" + dbName
+	protocol := "tcp(" + os.Getenv("INSTANCE_CONNECTION_NAME") + ")"
+	connect := user + ":" + pass + "@" + protocol + "/" + dbName + "?charset=utf8&parseTime=true&loc=Asia%2FTokyo"
 
 	db, err := gorm.Open("mysql", connect)
 	if err != nil {
