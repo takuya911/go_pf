@@ -21,7 +21,7 @@ services:
     environment:
       - DB_HOST=db
       - DB_PORT=3306
-      - DB_NAME=mysql-db
+      - DB_NAME=mysql_db
       - DB_USER=root
       - DB_PASS=password
       - DB_COLLATION=utf8mb4_unicode_ci
@@ -40,7 +40,7 @@ services:
       - ./infrastructure/mysql/init:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: mysql-db
+      MYSQL_DATABASE: mysql_db
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
