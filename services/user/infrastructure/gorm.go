@@ -1,14 +1,14 @@
 package infrastructure
 
 import (
+	"database/sql"
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/jinzhu/gorm"
 )
 
 // NewGormConnect function
-func NewGormConnect() (*gorm.DB, error) {
+func NewGormConnect() (*sql.DB, error) {
 
 	user := os.Getenv("DB_USER")
 	pass := os.Getenv("DB_PASS")
@@ -16,12 +16,8 @@ func NewGormConnect() (*gorm.DB, error) {
 
 	protocol := "tcp(" + os.Getenv("INSTANCE_CONNECTION_NAME") + ")"
 	connect := user + ":" + pass + "@" + protocol + "/" + dbName + "?charset=utf8&parseTime=true&loc=Asia%2FTokyo"
-	db, err := gorm.Open("mysql", connect)
-
+	db, err := sql.Open("mysql", connect)
 	if err != nil {
-		return nil, err
-	}
-	if err := db.DB().Ping(); err != nil {
 		return nil, err
 	}
 
