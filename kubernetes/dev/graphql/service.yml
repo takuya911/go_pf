@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: go-pf
-  name: go-pf
+  name: graphql-service
 spec:
   type: LoadBalancer
   ports:
@@ -12,6 +12,6 @@ spec:
     protocol: TCP
     targetPort: 80
   selector:
-    app: go-pf
+    app: graphql-pod
 status:
   loadBalancer: {}

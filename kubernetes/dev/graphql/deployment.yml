@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: go-pf
-  name: go-pf
+  name: graphql-pod
 spec:
   replicas: 1
   selector:
