@@ -17,3 +17,5 @@
 - GCP
   - Cloud Build(CI/CD)
   - Container Registory
+  - Cloud Run
+  - Cloud SQL(Mysql)
