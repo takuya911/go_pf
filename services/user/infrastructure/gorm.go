@@ -23,7 +23,7 @@ func NewGormConnect() (*gorm.DB, error) {
 		dbUser                 = os.Getenv("DB_USER")                  // e.g. 'my-db-user'
 		dbPwd                  = os.Getenv("DB_PASS")                  // e.g. 'my-db-password'
 		instanceConnectionName = os.Getenv("INSTANCE_CONNECTION_NAME") // e.g. 'project:region:instance'
-		dbName                 = os.Getenv("DB_NAME")                  // e.g. 'my-database'
+		dbName                 = "go_pf"                               // e.g. 'my-database'
 	)
 
 	socketDir, isSet := os.LookupEnv("DB_SOCKET_DIR")
