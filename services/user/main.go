@@ -16,7 +16,7 @@ func main() {
 	// db connect
 	dbConn, err := infrastructure.NewGormConnect()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	defer dbConn.Close()
 

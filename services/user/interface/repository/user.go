@@ -42,7 +42,6 @@ func (r *userRepository) CreateUser(ctx context.Context, u *domain.User) error {
 func (r *userRepository) UpdateUser(ctx context.Context, formUser *domain.User) (*domain.User, error) {
 	var bUser domain.User
 
-	// transaction
 	err := r.Conn.Transaction(func(tx *gorm.DB) error {
 		// update
 		if rs := tx.Save(&formUser); rs.Error != nil {
