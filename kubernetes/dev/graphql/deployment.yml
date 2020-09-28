@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: go-pf
+  name: go-pf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-pf
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: go-pf
+    spec:
+      containers:
+      - image: takuyaatsugi9924/go-pf_graphql:v1
+        name: graphql
+        env:
+        - name: GRAPHQL_PORT
+          value: "80"
+        - name: USER_SERVICE
+          value: user
+        - name: USER_SERVICE_PORT
+          value: "50051"
+        ports:
+          - containerPort: 80
+        resources: {}
+status: {}
