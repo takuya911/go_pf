@@ -22,7 +22,7 @@ spec:
         - name: GRAPHQL_PORT
           value: "80"
         - name: USER_SERVICE
-          value: user
+          value: user-service
         - name: USER_SERVICE_PORT
           value: "50051"
         ports:
