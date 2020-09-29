@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: go-pf
-  name: graphql-deploy
+  name: go-pf
 spec:
   replicas: 1
   selector:
@@ -24,9 +24,9 @@ spec:
         - name: GRAPHQL_PORT
           value: "80"
         - name: USER_SERVICE
-          value: user-service
+          value: user
         - name: USER_SERVICE_PORT
-          value: "8080"
+          value: "50051"
         ports:
           - containerPort: 80
         resources: {}
