@@ -2,9 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
-  labels:
-    app: graphql
-  name: graphql
+  name: graphql-deployment
 spec:
   replicas: 1
   selector:
