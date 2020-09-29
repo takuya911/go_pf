@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: user-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: user
+    spec:
+      containers:
+      - image: takuyaatsugi9924/go-pf_user:v1
+        name: user
+        env:
+        - name: INSTANCE_CONNECTION_NAME
+          value: mysql-service:3306
+        - name: DB_NAME
+          value: mysql_db
+        - name: DB_USER
+          value: root
+        - name: DB_PASS
+          value: password
+        - name: USER_SERVICE_PORT
+          value: "50051"
+        ports:
+          - containerPort: 50051
+        resources: {}
+status: {}
