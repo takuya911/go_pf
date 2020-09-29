@@ -1,9 +1,8 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  creationTimestamp: null
   name: local-pv-1
-  labels:
-    type: local
 spec:
   storageClassName: sc-db
   capacity:

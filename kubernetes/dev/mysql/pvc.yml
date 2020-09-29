@@ -1,11 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  creationTimestamp: null
   name: mysql-pv-claim
-  labels:
-    app: dev
 spec:
-  storageClassName: sc-db # この設定でPVとバインドされる
+  storageClassName: sc-db
   accessModes:
     - ReadWriteOnce
   resources:
