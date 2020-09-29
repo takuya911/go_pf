@@ -6,12 +6,13 @@ metadata:
     app: go-pf
   name: graphql-service
 spec:
-  type: LoadBalancer
+
   ports:
   - port: 80
     protocol: TCP
     targetPort: 80
   selector:
-    app: graphql-pod
+    app: graphql-deploy
+  type: LoadBalancer
 status:
   loadBalancer: {}
