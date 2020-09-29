@@ -3,19 +3,19 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: go-pf
-  name: go-pf
+    app: graphql
+  name: graphql
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: go-pf
+      app: graphql
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: go-pf
+        app: graphql
     spec:
       containers:
       - image: takuyaatsugi9924/go-pf_graphql:v1
