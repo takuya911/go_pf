@@ -20,9 +20,15 @@ spec:
         name: phpmyadmin
         env:
         - name: PMA_ARBITRARY
-          value: "1"
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: PMA_ARBITRARY
         - name: PMA_HOST
-          value: mysql-service
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: MYSQL_SERVICE_NAME
         - name: PMA_USER
           valueFrom:
             configMapKeyRef:

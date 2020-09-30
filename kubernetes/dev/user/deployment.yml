@@ -22,7 +22,10 @@ spec:
         - name: INSTANCE_CONNECTION_NAME
           value: mysql-service:3306
         - name: DB_NAME
-          value: mysql_db
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: MYSQL_DATABASE
         - name: DB_USER
           valueFrom:
             configMapKeyRef:
@@ -34,7 +37,10 @@ spec:
               name: mysql-secret
               key: MYSQL_PASSWORD
         - name: USER_SERVICE_PORT
-          value: "50051"
+          valueFrom:
+            configMapKeyRef:
+              name: user-configmap
+              key: USER_SERVICE_PORT
         ports:
           - containerPort: 50051
         resources: {}

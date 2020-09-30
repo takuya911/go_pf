@@ -20,11 +20,20 @@ spec:
         name: graphql
         env:
         - name: GRAPHQL_PORT
-          value: "80"
+          valueFrom:
+            configMapKeyRef:
+              name: graphql-configmap
+              key: GRAPHQL_PORT
         - name: USER_SERVICE
-          value: user-service
+          valueFrom:
+            configMapKeyRef:
+              name: user-configmap
+              key: USER_SERVICE_NAME
         - name: USER_SERVICE_PORT
-          value: "50051"
+          valueFrom:
+            configMapKeyRef:
+              name: user-configmap
+              key: USER_SERVICE_PORT
         ports:
           - containerPort: 80
         resources: {}
