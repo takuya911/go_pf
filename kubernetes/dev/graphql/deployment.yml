@@ -19,12 +19,12 @@ spec:
       - image: takuyaatsugi9924/go-pf_graphql:v1
         name: graphql
         env:
-        - name: GRAPHQL_PORT
+        - name: GRAPHQL_SERVICE_PORT
           valueFrom:
             configMapKeyRef:
               name: graphql-configmap
               key: GRAPHQL_SERVICE_PORT
-        - name: USER_SERVICE
+        - name: USER_SERVICE_NAME
           valueFrom:
             configMapKeyRef:
               name: user-configmap

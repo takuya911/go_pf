@@ -17,8 +17,8 @@ import (
 
 func main() {
 	// get env
-	graphqlPort := os.Getenv("GRAPHQL_PORT")
-	userService := os.Getenv("USER_SERVICE")
+	graphqlPort := os.Getenv("GRAPHQL_SERVICE_PORT")
+	userService := os.Getenv("USER_SERVICE_NAME")
 	userServicePort := os.Getenv("USER_SERVICE_PORT")
 
 	ctx := context.Background()

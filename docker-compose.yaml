@@ -9,10 +9,11 @@ services:
     ports:
       - "80:80"
     environment:
-      - GRAPHQL_PORT=80
-      - USER_SERVICE=user
+      - GRAPHQL_SERVICE_PORT=80
+      - USER_SERVICE_NAME=user
       - USER_SERVICE_PORT=50051
     tty: true
+
   user:
     build:
       context: ./services/user
@@ -29,6 +30,7 @@ services:
     ports:
       - "50051:50051"
     tty: true
+
   db:
     image: mysql:5.7
     ports:
