@@ -24,8 +24,14 @@ spec:
         - name: PMA_HOST
           value: mysql-service
         - name: PMA_USER
-          value: root
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: MYSQL_USER
         - name: PMA_PASSWORD
-          value: password
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_PASSWORD
         resources: {}
 status: {}
