@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: graphql-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graphql
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: graphql
+    spec:
+      containers:
+      - image: takuyaatsugi9924/go-pf_graphql:v1
+        name: graphql
+        env:
+        - name: GRAPHQL_SERVICE_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: graphql-configmap
+              key: GRAPHQL_SERVICE_PORT
+        - name: USER_SERVICE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: user-configmap
+              key: USER_SERVICE_NAME
+        - name: USER_SERVICE_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: user-configmap
+              key: USER_SERVICE_PORT
+        ports:
+          - containerPort: 80
+        resources: {}
+status: {}
