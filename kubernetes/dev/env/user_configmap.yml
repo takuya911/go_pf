@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-configmap
+data:
+  USER_SERVICE_NAME: user-service
+  USER_SERVICE_PORT: "50051"
