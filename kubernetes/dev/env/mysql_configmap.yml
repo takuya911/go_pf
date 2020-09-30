@@ -4,3 +4,6 @@ metadata:
   name: mysql-configmap
 data:
   MYSQL_USER: user
+  MYSQL_DATABASE: mysql_db
+  MYSQL_SERVICE_NAME: mysql-service
+  PMA_ARBITRARY: "1"
