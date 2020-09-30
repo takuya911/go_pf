@@ -15,7 +15,7 @@ spec:
         app: mysql
     spec:
       containers:
-      - image: mysql:5.7
+      - image: takuyaatsugi9924/go-pf_mysql:v1
         name: mysql
         env:
         - name: MYSQL_ROOT_PASSWORD
