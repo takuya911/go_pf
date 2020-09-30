@@ -7,3 +7,4 @@ data:
   MYSQL_DATABASE: mysql_db
   MYSQL_SERVICE_NAME: mysql-service
   PMA_ARBITRARY: "1"
+  MYSQL_PORT: "3306"

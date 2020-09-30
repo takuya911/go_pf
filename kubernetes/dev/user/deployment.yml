@@ -19,8 +19,11 @@ spec:
       - image: takuyaatsugi9924/go-pf_user:v1
         name: user
         env:
-        - name: INSTANCE_CONNECTION_NAME
-          value: mysql-service:3306
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: MYSQL_SERVICE_NAME
         - name: DB_NAME
           valueFrom:
             configMapKeyRef:
@@ -36,6 +39,11 @@ spec:
             secretKeyRef:
               name: mysql-secret
               key: MYSQL_PASSWORD
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: MYSQL_PORT
         - name: USER_SERVICE_PORT
           valueFrom:
             configMapKeyRef:

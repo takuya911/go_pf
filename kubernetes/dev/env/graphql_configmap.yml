@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: graphql-configmap
 data:
-  GRAPHQL_PORT: "80"
+  GRAPHQL_SERVICE_PORT: "80"

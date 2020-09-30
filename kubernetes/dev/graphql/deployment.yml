@@ -23,7 +23,7 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: graphql-configmap
-              key: GRAPHQL_PORT
+              key: GRAPHQL_SERVICE_PORT
         - name: USER_SERVICE
           valueFrom:
             configMapKeyRef:
