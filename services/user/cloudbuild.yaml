@@ -1,9 +1,0 @@
-steps:
-  # Build the container image
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/go-pf-290702/github.com/takuya911/go_pf/user:$COMMIT_SHA','-f','./services/user/build/Dockerfile','./services/user']
-  # Push the container image to Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/go-pf-290702/github.com/takuya911/go_pf/user:$COMMIT_SHA']
-images:
-  - gcr.io/go-pf-290702/github.com/takuya911/go_pf/user:$COMMIT_SHA
