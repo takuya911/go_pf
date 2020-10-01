@@ -12,6 +12,9 @@ jobs:
       run:
         working-directory: services/graphql
     steps:
+    - name: Test
+      run: |
+        ls
     - name: Build
       run: |
         docker build -t takuyaatsugi9924/go-pf_graphql:$GITHUB_SHA -f build/Dockerfile .
