@@ -21,4 +21,4 @@ jobs:
         docker build -t takuyaatsugi9924/go-pf_graphql:$GITHUB_SHA -f build/Dockerfile .
     - name: Publish
       run : |
-        docker push push takuyaatsugi9924/go-pf_graphql:$GITHUB_SHA
+        docker push takuyaatsugi9924/go-pf_graphql:$GITHUB_SHA
