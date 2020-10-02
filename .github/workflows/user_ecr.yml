@@ -1,4 +1,4 @@
-name: Go
+name: User service image build and push
 on:
   push:
     branches:
@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: services/graphql
+        working-directory: services/user
     steps:
     - uses: actions/checkout@v2
     - name: Configure AWS Credentials
@@ -23,7 +23,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
     - name: Build
       run: |
-        docker build -t 002146139975.dkr.ecr.ap-northeast-1.amazonaws.com/go-pf/graphql:$GITHUB_SHA -f build/Dockerfile .
+        docker build -t 002146139975.dkr.ecr.ap-northeast-1.amazonaws.com/go-pf/user:$GITHUB_SHA -f build/Dockerfile .
     - name: Push
       run: |
-        docker push 002146139975.dkr.ecr.ap-northeast-1.amazonaws.com/go-pf/graphql:$GITHUB_SHA
+        docker push 002146139975.dkr.ecr.ap-northeast-1.amazonaws.com/go-pf/user:$GITHUB_SHA
