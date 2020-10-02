@@ -8,20 +8,28 @@
 - GraphQL
 
 ## 使用技術
-- application
-  - Golang
-  - Protocol Buffers
-  - GraphQL
-    - gqlgen
-  - Mysql
-  - JWT
 
-- infrastructure
-  - dev
-    - Docker
-    - docker-compose
-    - Kubernetes
-      - minikube
-    - docker hub
-- tools
-  - github
+### application
+- Golang
+- Protocol Buffers
+- GraphQL
+  - gqlgen
+- Mysql
+- JWT
+
+### infrastructure
+- dev
+  - Docker
+  - docker-compose
+  - Kubernetes
+    - minikube
+  - docker hub
+
+- prod
+  - AWS
+    - Elastic Container Registry
+    - IAM
+
+### Tools
+  - Github
+  - Github Actions

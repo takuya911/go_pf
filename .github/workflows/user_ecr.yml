@@ -2,7 +2,7 @@ name: User service image build and push
 on:
   push:
     branches:
-    - master
+    - user_deploy
 jobs:
   build:
     name: Build
