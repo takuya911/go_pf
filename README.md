@@ -27,8 +27,10 @@
 
 - prod
   - AWS
-    - Elastic Container Registry
-    - IAM
+    - ECR(Elastic Container Registry)
+    - ECS(Elastic Container Service)
+    - IAM(Identity and Access Management)
+  - Terraform
 
 ### Tools
   - Github
