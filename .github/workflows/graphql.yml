@@ -2,7 +2,7 @@ name: GraphQl service image build and regist
 on:
   push:
     branches:
-    - master
+    - graphql-build
 env:
   GCP_PROJECT: golang-portfolio
   IMAGE: go_pf/graphql

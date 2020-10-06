@@ -2,7 +2,7 @@ name: User service image build and regist
 on:
   push:
     branches:
-    - master
+    - user-build
 env:
   GCP_PROJECT: golang-portfolio
   IMAGE: go_pf/user
