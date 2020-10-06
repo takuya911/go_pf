@@ -78,51 +78,6 @@ resource "aws_internet_gateway" "main" {
   }
 }
 
-resource "aws_eip" "nat_1a" {
-  vpc = true
-  tags = {
-    Name = "go-pf-natgw-1a"
-  }
-}
-
-resource "aws_nat_gateway" "nat_1a" {
-  subnet_id     = (aws_subnet.public_1a.id)
-  allocation_id = (aws_eip.nat_1a.id)
-  tags = {
-    Name = "go-pf-1a"
-  }
-}
-
-resource "aws_eip" "nat_1c" {
-  vpc = true
-  tags = {
-    Name = "go-pf-natgw-1c"
-  }
-}
-
-resource "aws_nat_gateway" "nat_1c" {
-  subnet_id     = (aws_subnet.public_1c.id)
-  allocation_id = (aws_eip.nat_1c.id)
-  tags = {
-    Name = "go-pf-1c"
-  }
-}
-
-resource "aws_eip" "nat_1d" {
-  vpc = true
-  tags = {
-    Name = "go-pf-natgw-1d"
-  }
-}
-
-resource "aws_nat_gateway" "nat_1d" {
-  subnet_id     = (aws_subnet.public_1d.id)
-  allocation_id = (aws_eip.nat_1d.id)
-  tags = {
-    Name = "go-pf-1d"
-  }
-}
-
 resource "aws_route_table" "public" {
   vpc_id = (aws_vpc.main.id)
   tags = {
@@ -170,39 +125,6 @@ resource "aws_route_table" "private_1d" {
   tags = {
     Name = "go-pf-private-1d"
   }
-}
-
-resource "aws_route" "private_1a" {
-  destination_cidr_block = "0.0.0.0/0"
-  route_table_id         = (aws_route_table.private_1a.id)
-  nat_gateway_id         = (aws_nat_gateway.nat_1a.id)
-}
-
-resource "aws_route" "private_1c" {
-  destination_cidr_block = "0.0.0.0/0"
-  route_table_id         = (aws_route_table.private_1c.id)
-  nat_gateway_id         = (aws_nat_gateway.nat_1c.id)
-}
-
-resource "aws_route" "private_1d" {
-  destination_cidr_block = "0.0.0.0/0"
-  route_table_id         = (aws_route_table.private_1d.id)
-  nat_gateway_id         = (aws_nat_gateway.nat_1d.id)
-}
-
-resource "aws_route_table_association" "private_1a" {
-  subnet_id      = (aws_subnet.private_1a.id)
-  route_table_id = (aws_route_table.private_1a.id)
-}
-
-resource "aws_route_table_association" "private_1c" {
-  subnet_id      = (aws_subnet.private_1c.id)
-  route_table_id = (aws_route_table.private_1c.id)
-}
-
-resource "aws_route_table_association" "private_1d" {
-  subnet_id      = (aws_subnet.private_1d.id)
-  route_table_id = (aws_route_table.private_1d.id)
 }
 
 resource "aws_security_group" "ecs" {
