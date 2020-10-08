@@ -10,3 +10,9 @@ resource "google_sql_database" "database" {
   name     = "go-pf-db"
   instance = google_sql_database_instance.instance.name
 }
+
+resource "google_sql_user" "users" {
+  name     = "user"
+  instance = google_sql_database_instance.instance.name
+  password = "password"
+}
