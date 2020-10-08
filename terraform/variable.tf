@@ -19,6 +19,5 @@ variable "user_service_name" {
 }
 
 variable "user_service_port" {
-  default = "80"
+  default = "50051"
 }
-
