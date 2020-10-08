@@ -28,6 +28,7 @@ func (c *userController) GetUserByID(ctx context.Context, in *pb.GetUserForm) (*
 	if err != nil {
 		return nil, err
 	}
+
 	return convUserProto(result)
 }
 

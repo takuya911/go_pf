@@ -15,9 +15,29 @@ variable "graphql_service_port" {
 }
 
 variable "user_service_name" {
-  default = "user"
+  default = "user-repftyfivq-an.a.run.app"
 }
 
 variable "user_service_port" {
-  default = "50051"
+  default = "443"
+}
+
+variable "user_image"{
+  default="gcr.io/golang-portfolio/go_pf/user@sha256:2bb5648c5e8df81a8abd10261872932dd6962c702cf305e8945ff5a9999be672"
+}
+
+variable "db_name"{
+  default="go-pf-database"
+}
+
+variable "db_user"{
+  default="user"
+}
+
+variable "db_pass"{
+  default="password"
+}
+
+variable "db_connect_name"{
+  default="golang-portfolio:asia-northeast1:go-pf"
 }

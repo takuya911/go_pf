@@ -26,8 +26,8 @@ func NewGormConnect() (*gorm.DB, error) {
 		}
 		return db, nil
 	} else {
-		instanceConnectionName := os.Getenv("INSTANCE_CONNECTION_NAME")
-		db, err := gorm.Open("mysql", fmt.Sprintf("%s:%s@unix(/cloudsql/%s)/%s", user, pass, instanceConnectionName, dbName))
+		dbConnectionName := os.Getenv("DB_CONNECT_NAME")
+		db, err := gorm.Open("mysql", fmt.Sprintf("%s:%s@unix(/cloudsql/%s)/%s", user, pass, dbConnectionName, dbName))
 		if err != nil {
 			return nil, err
 		}
