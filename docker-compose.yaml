@@ -27,6 +27,7 @@ services:
       - DB_USER=root
       - DB_PASS=password
       - USER_SERVICE_PORT=50051
+      - ENV=dev
     ports:
       - "50051:50051"
     tty: true
