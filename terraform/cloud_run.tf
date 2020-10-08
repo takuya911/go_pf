@@ -45,7 +45,7 @@ resource "google_cloud_run_service" "user" {
   template {
     metadata {
       annotations = {
-        "run.googleapis.com/cloudsql-instances" = "golang-portfolio:asia-northeast1:go-pf-instance"
+        "run.googleapis.com/cloudsql-instances" = var.db_connect_name
       }
     }
     spec {
