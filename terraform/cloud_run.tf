@@ -1,24 +1,23 @@
 resource "google_cloud_run_service" "default" {
   name     = "graphql"
   location = var.region_tokyo
-
   template {
     spec {
       container_concurrency = 80
       timeout_seconds       = 30
       containers {
-        image = "gcr.io/golang-portfolio/go_pf/graphql@sha256:292a98ceedafad8beb8fca9f9a1f1c5108a9dc73c258b43eed14bd64a35ed39e"
+        image = var.graphql_image
         env {
           name = "GRAPHQL_SERVICE_PORT"
-          value = "80"
+          value = var.graphql_service_port
         }
         env {
           name = "USER_SERVICE_NAME"
-          value = "user"
+          value = var.user_service_name
         }
         env {
           name = "USER_SERVICE_PORT"
-          value = "50051"
+          value = var.user_service_port
         }
         resources {
           limits = {
