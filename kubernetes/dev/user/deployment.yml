@@ -49,6 +49,11 @@ spec:
             configMapKeyRef:
               name: user-configmap
               key: USER_SERVICE_PORT
+        - name: ENV
+          valueFrom:
+            configMapKeyRef:
+              name: common-configmap
+              key: dev
         ports:
           - containerPort: 50051
         resources: {}
