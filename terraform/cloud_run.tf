@@ -1,3 +1,4 @@
+# Graphql Service
 resource "google_cloud_run_service" "graphql" {
   name     = "graphql"
   location = var.region_tokyo
@@ -8,25 +9,25 @@ resource "google_cloud_run_service" "graphql" {
       containers {
         image = var.graphql_image
         env {
-          name = "GRAPHQL_SERVICE_PORT"
+          name  = "GRAPHQL_SERVICE_PORT"
           value = var.graphql_service_port
         }
         env {
-          name = "USER_SERVICE_NAME"
+          name  = "USER_SERVICE_NAME"
           value = var.user_service_name
         }
         env {
-          name = "USER_SERVICE_PORT"
+          name  = "USER_SERVICE_PORT"
           value = var.user_service_port
         }
         resources {
           limits = {
-            "cpu":"1000m",
+            "cpu" : "1000m",
             "memory" : "128Mi"
           }
         }
-        ports{
-          container_port=80
+        ports {
+          container_port = 80
         }
       }
     }
@@ -52,3 +53,4 @@ resource "google_cloud_run_service_iam_policy" "noauth" {
   service     = google_cloud_run_service.graphql.name
   policy_data = data.google_iam_policy.noauth.policy_data
 }
+
