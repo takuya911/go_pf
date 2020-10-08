@@ -1,12 +1,12 @@
 provider "google" {
   project = "golang-portfolio"
-  region  = "asia-northeast1"
-  zone    = "asia-northeast1-a"
+  region  = var.region_tokyo
+  zone    = var.zone_tokyo
 }
 
 resource "google_cloud_run_service" "default" {
   name     = "graphql"
-  location = "asia-northeast1"
+  location = var.region_tokyo
 
   template {
     spec {
