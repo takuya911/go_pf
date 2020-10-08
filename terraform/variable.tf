@@ -23,11 +23,11 @@ variable "user_service_port" {
 }
 
 variable "user_image"{
-  default="gcr.io/golang-portfolio/go_pf/user@sha256:5bb6ce1e00cdf4711d05657e05d915f5a43e01ec7b9c4fb66da3b317db4027e9"
+  default="gcr.io/golang-portfolio/go_pf/user@sha256:2bb5648c5e8df81a8abd10261872932dd6962c702cf305e8945ff5a9999be672"
 }
 
 variable "db_name"{
-  default="go-pf-db"
+  default="go-pf-database"
 }
 
 variable "db_user"{
@@ -39,5 +39,5 @@ variable "db_pass"{
 }
 
 variable "db_connect_name"{
-  default="golang-portfolio:asia-northeast1:go-pf-instance"
+  default="golang-portfolio:asia-northeast1:go-pf"
 }
