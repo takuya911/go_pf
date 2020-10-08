@@ -1,4 +1,4 @@
-resource "google_cloud_run_service" "default" {
+resource "google_cloud_run_service" "graphql" {
   name     = "graphql"
   location = var.region_tokyo
   template {
@@ -47,8 +47,8 @@ data "google_iam_policy" "noauth" {
 }
 
 resource "google_cloud_run_service_iam_policy" "noauth" {
-  location    = google_cloud_run_service.default.location
-  project     = google_cloud_run_service.default.project
-  service     = google_cloud_run_service.default.name
+  location    = google_cloud_run_service.graphql.location
+  project     = google_cloud_run_service.graphql.project
+  service     = google_cloud_run_service.graphql.name
   policy_data = data.google_iam_policy.noauth.policy_data
 }
