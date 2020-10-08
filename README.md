@@ -26,10 +26,11 @@
   - docker hub
 
 - prod
-  - AWS
-    - ECR(Elastic Container Registry)
-    - ECS(Elastic Container Service)
-    - IAM(Identity and Access Management)
+  - GCP
+    - Cloud Run
+    - Container Registory
+    - Cloud SQL
+    - IAM
   - Terraform
 
 ### Tools
