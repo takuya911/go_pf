@@ -13,6 +13,8 @@ FROM alpine AS prod
 WORKDIR /app
 RUN apk add --no-cache curl tzdata
 
+RUN apk update && apk add ca-certificates && update-ca-certificates && rm -rf /var/cache/apk/*
+
 COPY --from=builder /src/main .
 
 CMD ["./main"]
