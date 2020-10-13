@@ -15,6 +15,7 @@ import (
 	"github.com/takuya911/go_pf/services/graphql/graph/generated"
 	pb "github.com/takuya911/go_pf/services/graphql/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 )
 
 func main() {
@@ -32,6 +33,13 @@ func main() {
 	if "dev" == env {
 		opts = append(opts, grpc.WithInsecure())
 	} else {
+		// これは動くやつ
+		creds, err := credentials.NewClientTLSFromFile("/etc/ssl/certs/ca-certificates.crt", "")
+		if err != nil {
+			log.Fatalf("failed to load credentials: %v", err)
+		}
+		opts = append(opts, grpc.WithTransportCredentials(creds))
+
 		serverHost := flag.String("server-host", "", "user-repftyfivq-an.a.run.app:443")
 		opts = append(opts, grpc.WithAuthority(*serverHost))
 	}
