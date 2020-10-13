@@ -2,19 +2,17 @@ package main
 
 import (
 	"context"
-	"flag"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
 
-	"cloud.google.com/go/compute/metadata"
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/takuya911/go_pf/services/graphql/graph"
 	"github.com/takuya911/go_pf/services/graphql/graph/generated"
 	pb "github.com/takuya911/go_pf/services/graphql/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 )
 
 func main() {
@@ -31,10 +29,16 @@ func main() {
 
 	if "dev" == env {
 		opts = append(opts, grpc.WithInsecure())
+
 	} else {
-		serverHost := flag.String("server-host", "", "user-repftyfivq-an.a.run.app:443")
-		opts = append(opts, grpc.WithAuthority(*serverHost))
+		creds, err := credentials.NewClientTLSFromFile("/etc/ssl/certs/ca-certificates.crt", "")
+		if err != nil {
+			log.Fatalf("failed to load credentials: %v", err)
+		}
+		opts = append(opts, grpc.WithTransportCredentials(creds))
+
 	}
+
 	conn, err := grpc.DialContext(ctx, userService+":"+userServicePort, opts...)
 	if err != nil {
 		panic(err)
@@ -51,19 +55,4 @@ func main() {
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", graphqlPort)
 	log.Fatal(http.ListenAndServe(":"+graphqlPort, nil))
-}
-
-func makeGetRequest(serviceURL string) (*http.Response, error) {
-	tokenURL := fmt.Sprintf("/instance/service-accounts/default/identity?audience=%s", os.Getenv("USER_SERVICE_NAME"))
-	idToken, err := metadata.Get(tokenURL)
-	if err != nil {
-		return nil, fmt.Errorf("metadata.Get: failed to query id_token: %+v", err)
-	}
-
-	req, err := http.NewRequest("GET", serviceURL, nil)
-	if err != nil {
-		return nil, err
-	}
-	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", idToken))
-	return http.DefaultClient.Do(req)
 }
