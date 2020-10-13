@@ -1,6 +1,6 @@
 # よく変更する部分
 variable "graphql_image" {
-  default = "gcr.io/golang-portfolio/go_pf/graphql@sha256:f6019dba79d27677ed8d286fd2a1a760850e6ad34b7837e41e4a657747825914"
+  default = "gcr.io/golang-portfolio/go_pf/graphql@sha256:974efa899b8ea00c9891a4309f93f8aa2fcb0021618f2dbcd8ca4ea033fa894a"
 }
 
 variable "user_image"{
@@ -8,11 +8,11 @@ variable "user_image"{
 }
 
 variable "db_instance"{
-  default="gopfi"
+  default="go-ptfo"
 }
 
 variable "db_connect_name"{
-  default="golang-portfolio:asia-northeast1:gopfi"
+  default="golang-portfolio:asia-northeast1:go-ptfo"
 }
 
 ##################################################
@@ -47,4 +47,3 @@ variable "db_user"{
 variable "db_pass"{
   default="password"
 }
-
