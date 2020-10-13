@@ -29,18 +29,16 @@ func main() {
 
 	if "dev" == env {
 		opts = append(opts, grpc.WithInsecure())
+
 	} else {
-		// これは動くやつ
 		creds, err := credentials.NewClientTLSFromFile("/etc/ssl/certs/ca-certificates.crt", "")
 		if err != nil {
 			log.Fatalf("failed to load credentials: %v", err)
 		}
 		opts = append(opts, grpc.WithTransportCredentials(creds))
 
-		// serverHost := flag.String("server-host", "", userService+":"+userServicePort)
-		serverHost := userService + ":" + userServicePort
-		opts = append(opts, grpc.WithAuthority(serverHost))
 	}
+
 	conn, err := grpc.DialContext(ctx, userService+":"+userServicePort, opts...)
 	if err != nil {
 		panic(err)
