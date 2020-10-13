@@ -4,7 +4,7 @@ resource "google_cloud_run_service" "graphql" {
   location = var.region_tokyo
   template {
     spec {
-      container_concurrency = var.graphql_service_port
+      container_concurrency = 20
       timeout_seconds       = 30
       containers {
         image = var.graphql_image
@@ -49,7 +49,7 @@ resource "google_cloud_run_service" "user" {
       }
     }
     spec {
-      container_concurrency = var.user_service_port
+      container_concurrency = 20
       timeout_seconds       = 30
       containers {
         image = var.user_image
