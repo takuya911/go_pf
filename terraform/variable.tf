@@ -27,7 +27,7 @@ variable "user_image"{
 }
 
 variable "db_instance"{
-  default="gopfin"
+  default="gopf"
 }
 
 variable "db_name"{
@@ -43,6 +43,6 @@ variable "db_pass"{
 }
 
 variable "db_connect_name"{
-  default="golang-portfolio:asia-northeast1:gopfin"
+  default="golang-portfolio:asia-northeast1:gopf"
 }
 

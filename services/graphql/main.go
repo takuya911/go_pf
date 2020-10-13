@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"log"
 	"net/http"
 	"os"
@@ -12,7 +13,6 @@ import (
 	"github.com/takuya911/go_pf/services/graphql/graph/generated"
 	pb "github.com/takuya911/go_pf/services/graphql/proto"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 )
 
 func main() {
@@ -25,7 +25,15 @@ func main() {
 	ctx := context.Background()
 
 	// User gRPC connect
-	conn, err := grpc.DialContext(ctx, userService+":"+userServicePort, grpcConnSecOption(env))
+	var opts []grpc.DialOption
+
+	if "dev" == env {
+		opts = append(opts, grpc.WithInsecure())
+	} else {
+		serverHost := flag.String("server-host", "", "https://user-repftyfivq-an.a.run.app")
+		opts = append(opts, grpc.WithAuthority(*serverHost))
+	}
+	conn, err := grpc.DialContext(ctx, userService+":"+userServicePort, opts...)
 	if err != nil {
 		panic(err)
 	}
@@ -41,19 +49,4 @@ func main() {
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", graphqlPort)
 	log.Fatal(http.ListenAndServe(":"+graphqlPort, nil))
-}
-
-// なんかconfに切り離せなかった
-func grpcConnSecOption(env string) grpc.DialOption {
-	var opt grpc.DialOption
-	if "dev" == env {
-		opt = grpc.WithInsecure()
-	} else {
-		creds, err := credentials.NewClientTLSFromFile("/etc/ssl/certs/ca-certificates.crt", "")
-		if err != nil {
-			log.Fatalf("failed to load credentials: %v", err)
-		}
-		opt = grpc.WithTransportCredentials(creds)
-	}
-	return opt
 }
