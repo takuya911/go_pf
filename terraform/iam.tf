@@ -13,3 +13,8 @@ resource "google_cloud_run_service_iam_policy" "noauth" {
   service     = google_cloud_run_service.graphql.name
   policy_data = data.google_iam_policy.noauth.policy_data
 }
+
+resource "google_project_iam_member" "add_cloud_run_invoker" {
+  role   = "roles/run.invoker"
+  member = "serviceAccount:394529206277-compute@developer.gserviceaccount.com"
+}

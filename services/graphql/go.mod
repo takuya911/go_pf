@@ -3,6 +3,7 @@ module github.com/takuya911/go_pf/services/graphql
 go 1.14
 
 require (
+	cloud.google.com/go v0.46.3
 	github.com/99designs/gqlgen v0.12.2
 	github.com/ezio1119/fishapp-user v0.0.0-20200701083907-f27f80bfed1a
 	github.com/golang/protobuf v1.4.2

@@ -1,6 +1,6 @@
 resource "google_sql_database_instance" "instance" {
-  name   = "go-pf"
-  region = "asia-northeast1"
+  name   = var.db_instance
+  region = var.region_tokyo
   settings {
     tier = "db-f1-micro"
   }
