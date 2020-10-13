@@ -7,7 +7,7 @@ variable "region_tokyo" {
 }
 
 variable "graphql_image" {
-  default = "gcr.io/golang-portfolio/go_pf/graphql@sha256:292a98ceedafad8beb8fca9f9a1f1c5108a9dc73c258b43eed14bd64a35ed39e"
+  default = "gcr.io/golang-portfolio/go_pf/graphql@sha256:b8ff013a3d111bc374c9597f8d234301ce2af35b3b829b3d5352cf18dade8ef2"
 }
 
 variable "graphql_service_port" {
@@ -23,11 +23,15 @@ variable "user_service_port" {
 }
 
 variable "user_image"{
-  default="gcr.io/golang-portfolio/go_pf/user@sha256:2bb5648c5e8df81a8abd10261872932dd6962c702cf305e8945ff5a9999be672"
+  default="gcr.io/golang-portfolio/go_pf/user@sha256:bda031d12e6879a8574236b1313e480c88fda094f2f3d253af8f2254183b66bb"
+}
+
+variable "db_instance"{
+  default="gopf"
 }
 
 variable "db_name"{
-  default="go-pf-database"
+  default="go-pf-db"
 }
 
 variable "db_user"{
@@ -39,5 +43,6 @@ variable "db_pass"{
 }
 
 variable "db_connect_name"{
-  default="golang-portfolio:asia-northeast1:go-pf"
+  default="golang-portfolio:asia-northeast1:gopf"
 }
+
