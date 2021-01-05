@@ -8,9 +8,9 @@ import (
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
-	"github.com/takuya911/go_pf/services/graphql/graph"
-	"github.com/takuya911/go_pf/services/graphql/graph/generated"
-	pb "github.com/takuya911/go_pf/services/graphql/proto"
+	"github.com/takuya911/gqlgen-grpc/services/graphql/graph"
+	"github.com/takuya911/gqlgen-grpc/services/graphql/graph/generated"
+	pb "github.com/takuya911/gqlgen-grpc/services/graphql/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )

@@ -5,11 +5,11 @@ import (
 	"net"
 	"os"
 
-	"github.com/takuya911/go_pf/services/user/infrastructure"
-	"github.com/takuya911/go_pf/services/user/interface/controller"
-	"github.com/takuya911/go_pf/services/user/interface/repository"
-	pb "github.com/takuya911/go_pf/services/user/proto"
-	"github.com/takuya911/go_pf/services/user/usecase/interactor"
+	"github.com/takuya911/gqlgen-grpc/services/user/infrastructure"
+	"github.com/takuya911/gqlgen-grpc/services/user/interface/controller"
+	"github.com/takuya911/gqlgen-grpc/services/user/interface/repository"
+	pb "github.com/takuya911/gqlgen-grpc/services/user/proto"
+	"github.com/takuya911/gqlgen-grpc/services/user/usecase/interactor"
 )
 
 func main() {

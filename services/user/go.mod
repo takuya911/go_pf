@@ -1,4 +1,4 @@
-module github.com/takuya911/go_pf/services/user
+module github.com/takuya911/gqlgen-grpc/services/user
 
 go 1.14
 
@@ -9,7 +9,6 @@ require (
 	github.com/google/uuid v1.1.2
 	github.com/jinzhu/gorm v1.9.16
 	golang.org/x/crypto v0.0.0-20191205180655-e7c4368fe9dd
-	google.golang.org/appengine v1.4.0
 	google.golang.org/grpc v1.32.0
 	google.golang.org/protobuf v1.25.0
 )

@@ -2,8 +2,8 @@ package controller
 
 import (
 	"github.com/golang/protobuf/ptypes"
-	"github.com/takuya911/go_pf/services/user/domain"
-	pb "github.com/takuya911/go_pf/services/user/proto"
+	"github.com/takuya911/gqlgen-grpc/services/user/domain"
+	pb "github.com/takuya911/gqlgen-grpc/services/user/proto"
 )
 
 func convUserProto(u *domain.User) (*pb.User, error) {

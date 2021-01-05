@@ -4,9 +4,9 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/takuya911/go_pf/services/user/domain"
-	"github.com/takuya911/go_pf/services/user/errors"
-	"github.com/takuya911/go_pf/services/user/usecase/repository"
+	"github.com/takuya911/gqlgen-grpc/services/user/domain"
+	"github.com/takuya911/gqlgen-grpc/services/user/errors"
+	"github.com/takuya911/gqlgen-grpc/services/user/usecase/repository"
 )
 
 type userInteractor struct {

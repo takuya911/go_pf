@@ -1,7 +1,7 @@
 package interactor
 
 import (
-	"github.com/takuya911/go_pf/services/user/errors"
+	"github.com/takuya911/gqlgen-grpc/services/user/errors"
 	"golang.org/x/crypto/bcrypt"
 )
 

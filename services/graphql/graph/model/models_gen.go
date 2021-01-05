@@ -3,7 +3,7 @@
 package model
 
 import (
-	user "github.com/takuya911/go_pf/services/graphql/proto"
+	user "github.com/takuya911/gqlgen-grpc/services/graphql/proto"
 )
 
 type CreateUserInput struct {

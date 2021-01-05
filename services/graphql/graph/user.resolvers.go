@@ -6,9 +6,9 @@ package graph
 import (
 	"context"
 
-	"github.com/takuya911/go_pf/services/graphql/graph/generated"
-	"github.com/takuya911/go_pf/services/graphql/graph/model"
-	user "github.com/takuya911/go_pf/services/graphql/proto"
+	"github.com/takuya911/gqlgen-grpc/services/graphql/graph/generated"
+	"github.com/takuya911/gqlgen-grpc/services/graphql/graph/model"
+	user "github.com/takuya911/gqlgen-grpc/services/graphql/proto"
 )
 
 func (r *mutationResolver) Login(ctx context.Context, input model.LoginInput) (*model.LoginPayload, error) {

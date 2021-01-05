@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/jinzhu/gorm"
-	"github.com/takuya911/go_pf/services/user/domain"
+	"github.com/takuya911/gqlgen-grpc/services/user/domain"
 )
 
 type userRepository struct {

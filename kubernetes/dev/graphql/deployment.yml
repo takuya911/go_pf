@@ -16,7 +16,7 @@ spec:
         app: graphql
     spec:
       containers:
-      - image: takuyaatsugi9924/go-pf_graphql:v1
+      - image: takuyaatsugi9924/gqlgen-grpc_graphql:v1
         name: graphql
         env:
         - name: GRAPHQL_SERVICE_PORT

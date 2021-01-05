@@ -1,7 +1,7 @@
 package infrastructure
 
 import (
-	pb "github.com/takuya911/go_pf/services/user/proto"
+	pb "github.com/takuya911/gqlgen-grpc/services/user/proto"
 	"google.golang.org/grpc"
 )
 

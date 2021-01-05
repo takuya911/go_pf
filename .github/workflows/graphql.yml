@@ -5,7 +5,7 @@ on:
     - graphql-build
 env:
   GCP_PROJECT: golang-portfolio
-  IMAGE: go_pf/graphql
+  IMAGE: gqlgen-grpc/graphql
 jobs:
   build:
     name: Build

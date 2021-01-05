@@ -3,7 +3,7 @@ package usecase
 import (
 	"context"
 
-	"github.com/takuya911/go_pf/services/user/domain"
+	"github.com/takuya911/gqlgen-grpc/services/user/domain"
 )
 
 // UserUsecase interface

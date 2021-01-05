@@ -5,7 +5,7 @@ on:
     - user-build
 env:
   GCP_PROJECT: golang-portfolio
-  IMAGE: go_pf/user
+  IMAGE: gqlgen-grpc/user
 jobs:
   build:
     name: Build

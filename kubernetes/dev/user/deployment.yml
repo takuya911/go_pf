@@ -16,7 +16,7 @@ spec:
         app: user
     spec:
       containers:
-      - image: takuyaatsugi9924/go-pf_user:v1
+      - image: takuyaatsugi9924/gqlgen-grpc_user:v1
         name: user
         env:
         - name: DB_HOST

@@ -1,10 +1,10 @@
 # よく変更する部分
 variable "graphql_image" {
-  default = "gcr.io/golang-portfolio/go_pf/graphql@sha256:974efa899b8ea00c9891a4309f93f8aa2fcb0021618f2dbcd8ca4ea033fa894a"
+  default = "gcr.io/golang-portfolio/gqlgen-grpc/graphql@sha256:974efa899b8ea00c9891a4309f93f8aa2fcb0021618f2dbcd8ca4ea033fa894a"
 }
 
 variable "user_image"{
-  default="gcr.io/golang-portfolio/go_pf/user@sha256:85edd9b3fed1865cd5a289817e78f30cf0d40ed8b400f08dd7aab23d339abd21"
+  default="gcr.io/golang-portfolio/gqlgen-grpc/user@sha256:85edd9b3fed1865cd5a289817e78f30cf0d40ed8b400f08dd7aab23d339abd21"
 }
 
 variable "db_instance"{
@@ -37,7 +37,7 @@ variable "user_service_port" {
 }
 
 variable "db_name"{
-  default="go-pf-db"
+  default="gqlgen-grpc-db"
 }
 
 variable "db_user"{

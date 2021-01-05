@@ -3,10 +3,10 @@ package controller
 import (
 	"context"
 
-	"github.com/takuya911/go_pf/services/user/domain"
-	"github.com/takuya911/go_pf/services/user/errors"
-	"github.com/takuya911/go_pf/services/user/interface/usecase"
-	pb "github.com/takuya911/go_pf/services/user/proto"
+	"github.com/takuya911/gqlgen-grpc/services/user/domain"
+	"github.com/takuya911/gqlgen-grpc/services/user/errors"
+	"github.com/takuya911/gqlgen-grpc/services/user/interface/usecase"
+	pb "github.com/takuya911/gqlgen-grpc/services/user/proto"
 )
 
 type userController struct {
